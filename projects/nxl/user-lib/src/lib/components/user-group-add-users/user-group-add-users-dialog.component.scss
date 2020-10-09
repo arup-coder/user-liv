@@ -1,0 +1,10 @@
+@import "../../../../../../../src/styles.scss";
+
+.border-underline-search{padding: 1.25rem;}
+span.spl-text{
+    color: $primary-color; margin-left: 0.4rem; margin-right: auto;
+}
+.add-more{
+    color: $primary-color; font-size: $font-size-base; @include flexbox; @include align-items($value: center);
+}
+.border-underline-search{margin: 1.25rem; padding: 0;}

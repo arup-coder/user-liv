@@ -1,0 +1,84 @@
+<lib-user-second-top-bar [title]="title"></lib-user-second-top-bar>
+<div class="body-content p-0">
+  <mat-horizontal-stepper
+    #stepper
+    class="stepper-mini-style"
+    (selectionChange)="onNavigationChange($event)"
+  >
+    <mat-step>
+      <ng-template matStepLabel>Upload/Download File</ng-template>
+      <mat-card class="mat-elevation-z import-data">
+        <h4>Import Data By CSV File</h4>
+        <div
+          class="flex-container"
+          fxLayout.lt-md="column"
+          fxLayout="row"
+          fxLayoutGap="63px"
+          fxLayoutGap.lt-sm="30px"
+        >
+          <div fxFlex="50" fxFlex.lt-md="100">
+            <lib-user-template-download
+              (onTemplateDownload)="onClickTemplateDownload()"
+            ></lib-user-template-download>
+          </div>
+          <div fxFlex="50" fxFlex.lt-md="100">
+            <lib-user-template-upload
+              (onFileUpload)="onFileUpload($event)"
+              (fileUploadCancel)="fileUploadCancel()"
+              [fileName]="fileName"
+            >
+            </lib-user-template-upload>
+          </div>
+        </div>
+      </mat-card>
+      <div class="form-submit-action">
+        <button mat-flat-button class="btn-lg" routerLink="/user/user-list">
+          Cancel
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          class="btn-lg"
+          matStepperNext
+          [disabled]="!csvFields || !irsFields"
+        >
+          Next
+        </button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Mapping Fields</ng-template>
+      <div class="bulk-map-wrap" *ngIf="mappingValues && csvFields && csvFields.length > 0">
+        <lib-user-bulk-fields-map
+          [mappingValues]="mappingValues"
+          [parsedIrsValues]="parsedIrsValues"
+          (onSelectMapValue)="onSelectMapValue($event)"
+        ></lib-user-bulk-fields-map>
+      </div>
+      <div class="form-submit-action">
+        <button mat-flat-button color="accent" class="btn-lg mr-auto" matStepperPrevious>
+          Back
+        </button>
+        <button mat-flat-button class="btn-lg" routerLink="/user/user-list">
+          Cancel</button
+        >
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="!isValid"
+          class="btn-lg"
+          [disableIfUnauthorized]="moduleName.User"
+          [permissionType]="permissions.create"
+          (click)="onPreviewClick()"
+          routerLink="/user/user-list"
+        >
+          Upload
+        </button>
+      </div>
+    </mat-step>
+    <!-- Icon overrides. -->
+    <ng-template matStepperIcon="edit" class="done">
+      <mat-icon>done</mat-icon>
+    </ng-template>
+  </mat-horizontal-stepper>
+</div>

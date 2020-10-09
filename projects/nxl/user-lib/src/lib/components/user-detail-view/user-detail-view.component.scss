@@ -1,0 +1,44 @@
+@import "../../../../../../../src/styles.scss";
+
+.view-user{ min-width: 25rem;
+    &__head{
+        @include flexbox; @include align-items($value: center); @include justify-content($value: space-between); padding: 1rem 1.25rem; background: #F2F2F8;
+        span{font-family: 'Montserrat'; font-weight: 600; color: $primary-text-color; font-size: 0.9375rem;}
+    }
+    &__body{padding: 1.25rem;
+        .mat-card{padding: 0; box-shadow: none;}
+    }
+    &__avatar-head{align-items: center;
+        .mat-card-avatar{width: 6rem; height: 6rem; background: $primary-color; color: #fff; @include flexbox; @include align-items($value: center); @include justify-content($value: center); text-transform: uppercase; font-size: 1.3rem;}
+        .mat-card-title{font-size: 1.125rem; color: $primary-text-color; font-weight: 600; margin-bottom: 0.4rem;}
+        .mat-card-subtitle{margin-bottom: 0.625rem; color: $secondary-text-color; font-size: 0.9rem;}
+        .mat-card-subtitle:not(:first-child){margin-top: 0;}
+        .mat-card-subtitle:last-child{margin-bottom: 0;}
+    }
+
+    ::ng-deep{
+        .mat-list-base{ padding: 0; margin-bottom: 2rem;
+            &:first-child{margin-top: 2rem;}
+            .mat-subheader:first-child{margin-top: 0;}
+            .mat-subheader{
+                padding: 0; height: auto; margin-bottom: 0.625rem; line-height: normal; font-size: 0.9375rem; font-weight: 600; @include flexbox; @include align-items($value: center); @include justify-content($value: space-between); color: $primary-text-color;
+                a{
+                    .material-icons{font-size: 1rem;}
+                }
+            }
+            .mat-list-item{height: auto; padding: 0.2rem 0 0 0; margin-bottom: .35rem;}
+            .mat-list-item-content{padding: 0;
+                .mat-list-text{flex-direction: row;
+                    label{display: block; min-width: 7.7rem; color: $light-gray; font-size: 0.87rem;}
+                    p{color: $primary-text-color; font-size: 0.87rem;
+                        span{display: block;}
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 767px){
+    .view-user{min-width: 330px;}
+}

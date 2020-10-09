@@ -1,0 +1,12 @@
+<lib-user-second-top-bar [title]="title"></lib-user-second-top-bar>
+<div class="basic-profile body-content" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+  <!-- Profile Menu -->
+  <div fxFlex="250px" fxFlex.gt-md="300px" fxFlex.lt-md="100" class="d-sm-none" fxFlex.lt-sm="100">
+    <lib-user-profile-menu [userDetail]="userDetail$"></lib-user-profile-menu>
+  </div>
+
+  <!-- Profile Details -->
+  <div fxFlex="100" fxFlex.lt-md="100">
+    <router-outlet></router-outlet>
+  </div>
+</div>

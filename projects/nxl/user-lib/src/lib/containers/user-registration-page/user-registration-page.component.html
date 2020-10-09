@@ -1,0 +1,9 @@
+<div class="registration-page-1">
+  <lib-user-second-top-bar [title]="title"></lib-user-second-top-bar>
+  <div class="body-content">
+    <lib-user-registration (onCreateUser)="onCreateUser($event)" (onUpdateUser)="onUpdateUser($event)"
+      [userDetail]="userDetail" [userEmailAddress]="userEmailAddress" [fieldList]="fieldList$ | async"
+      (onSelectUserCountry)="onSelectCountry($event)" [countryList]="countryList" [stateList]="stateList">
+    </lib-user-registration>
+  </div>
+</div>

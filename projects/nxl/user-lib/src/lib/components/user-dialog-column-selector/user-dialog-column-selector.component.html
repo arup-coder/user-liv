@@ -1,0 +1,54 @@
+<mat-dialog-content>
+  <div class="flex-container border-bottom">
+
+    <h2 class="border-bottom">Modify Column For User</h2>
+    <ul class="list-selector">
+      <div *ngFor="let item of UserSelectColumnList">
+        <li>
+          <mat-checkbox color="primary" [checked]="item.visible" (change)="onColumnVisableChange($event, item, UserSelectColumnList)">
+            {{ item.displayColumn }}</mat-checkbox>
+        </li>
+      </div>
+
+    </ul>
+
+
+    <!-- <div fxFlex="50" fxFlex.lt-md="100">
+      <h2 class="border-bottom">Drag & Drop To Reorder</h2>
+      <ul
+        class="list-drager"
+        cdkDropList
+        #newColumnList="cdkDropList"
+        [cdkDropListData]="userDragandDropColumnList"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div *ngFor="let item of userDragandDropColumnList">
+          <li *ngIf="item.visible == true">
+            <div cdkDrag class="drag-list">
+              <i class="material-icons"> drag_handle </i>
+              <span>{{ item.displayColumn }}</span>
+            </div>
+            <button mat-flat-button (click)="onClickDeleteItem($event, item, UserSelectColumnList)">
+              <i class="material-icons">
+                delete_outline
+              </i>
+            </button>
+          </li>
+        </div>
+      </ul>
+    </div> -->
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="accent" class="btn btn-sm mr-auto"
+    (click)="onClickReset(userDragandDropColumnList)">
+    Reset
+  </button>
+  <button mat-flat-button class="btn btn-sm"  [mat-dialog-close]="true"  (click)="onClickCancel()">
+    Cancel
+  </button>
+  <button mat-flat-button color="primary" class="btn btn-sm" (click)="onClickApply()">
+    Apply
+  </button>
+</mat-dialog-actions>

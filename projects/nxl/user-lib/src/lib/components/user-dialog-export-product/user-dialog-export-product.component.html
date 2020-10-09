@@ -1,0 +1,33 @@
+<div class="export-dialog">
+    <h2 mat-dialog-title>Export products to CSV file
+        <a href="javascript:void(0)" class="close-btn" mat-dialog-close
+            (click)="onClickCancel()"><i class="material-icons">close</i>
+        </a>
+    </h2>
+    <mat-dialog-content class="p-20">
+        <p>This CSV file can update all user information.</p>
+        <div class="exp-cell">
+            <h4>Export:</h4>
+            <mat-radio-group name="exportTypeGrp">
+                <mat-radio-button *ngFor="let item of exportUsersOption.list; let i = index" [value]="item.value"
+                    [checked]="item.checked" name="itemList" (click)="selectedExportType = item.value">
+                    {{ item.name}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <!-- <div class="exp-cell">
+            <h4>Export as:</h4>
+            <mat-radio-group class="radio-group" name="exportFileTypeGrp">
+                <mat-radio-button *ngFor="let item of exportFileTypeOption.list; let i = index" [value]="item.value"
+                    [checked]="item.checked" name="itemList" (click)="selectedExportFileType = item.value">
+                    {{ item.name}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div> -->
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-flat-button class="btn-sm" (click)="onClickCancel()">Cancel</button>
+        <button mat-flat-button color="primary" class="btn-sm"
+            (click)="onClickExport(selectedExportType)">Export</button>
+    </mat-dialog-actions>
+</div>

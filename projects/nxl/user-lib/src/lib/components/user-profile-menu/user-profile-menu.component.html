@@ -1,0 +1,14 @@
+<div class="profile-component">
+    <mat-card-header class="avatar-head">
+        <div mat-card-avatar class="example-header-image">{{userDetail[0].firstName | slice:0:1}}{{userDetail[0].lastName | slice:0:1}}</div>
+        <mat-card-title>{{userDetail[0].firstName + ' ' + userDetail[0].lastName}}</mat-card-title>
+        <mat-card-subtitle>{{userDetail[0].email}}</mat-card-subtitle>
+    </mat-card-header>
+    <ul>
+        <li><a mat-menu-item [routerLink]="['user-profile']"  [routerLinkActive]="['active']"><i class="material-icons">perm_identity</i>Profile</a></li>
+        <li><a mat-menu-item [routerLink]="['user-password-reset']" [routerLinkActive]="['active']"><i class="material-icons-outlined">lock</i>Password</a></li>
+        <li><a mat-menu-item><i class="material-icons-outlined">settings</i>Settings</a></li>
+        <mat-divider></mat-divider>
+        <li><a mat-menu-item><i class="material-icons">power_settings_new</i>Log Out</a></li>
+    </ul>
+</div>

@@ -1,0 +1,27 @@
+@import '../../../../../../../src/styles.scss';
+
+.navigation-bar {
+  @include nav-frame();
+  
+  /*---- Second top bar -----*/
+  .topSecondBar {
+    @include top-second-bar();
+  }
+}
+
+@media only screen and (max-width: 767px){
+  .navigation-bar{
+    .topSecondBar {
+      padding: 0.68rem 1.25rem 2.125rem; 
+      min-height: 4.938rem;
+
+      h2{font-size: 1.2rem;}
+      .arrow-left{width: 1.5rem; font-size: 1.5rem;
+        span{font-size: 2rem; margin-left: -.7rem;}
+      }
+      .circle-btn { width: 2.125rem; height: 2.125rem; line-height: 2.125rem;
+        span{font-size: 1.5rem;}
+      }
+    }
+  }
+}

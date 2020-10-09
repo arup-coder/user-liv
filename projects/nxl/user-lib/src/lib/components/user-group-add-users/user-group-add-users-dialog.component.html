@@ -1,0 +1,93 @@
+<h2 mat-dialog-title>
+   {{selectedUsers.length === 0 ? 'Add' : 'Update'}} users to <span class="spl-text">{{ groupName }}</span>
+  <a href="javascript:void(0)" class="close-btn" mat-dialog-close (click)="onCancel()"
+    ><i class="material-icons">close</i>
+  </a>
+</h2>
+<mat-dialog-content class="p-20">
+  <div *ngIf="usersList.length > 0">
+    <div class="border-underline-search">
+      <span class="material-icons">search</span>
+      <input
+        type=""
+        class="search-input"
+        placeholder="Search users"
+        (keyup)="onSearchKeyUp($event)"
+      />
+    </div>
+    <p *ngIf="selectedUsers.length > 0">{{ selectedUsers.length }} user(s) selected.</p>
+    <div class="table-wrapper">
+      <table mat-table [dataSource]="usersList">
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="checkbox">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox
+              color="primary"
+              (change)="onCheckAll($event)"
+              [indeterminate]="isIntermediateSelect"
+              [checked]="isSelectAll"
+            ></mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let user">
+            <mat-checkbox
+              color="primary"
+              [checked]="user.isSelected"
+              (change)="onCheck($event, user)"
+            >
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <!--  First Name -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let user">{{ user.name }}</td>
+        </ng-container>
+
+        <!-- User Name -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>Email</th>
+          <td mat-cell *matCellDef="let user">{{ user.userName }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <mat-paginator
+      #paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+      [pageSize]="pagination.pageSize"
+      (page)="onChangePageEvent($event)"
+      [length]="pagination.recordCount"
+    ></mat-paginator>
+  </div>
+  <div *ngIf="usersList.length === 0">
+    <p>
+      This tenant doesn't have users.
+    </p>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <a
+    href="javascript:void(0)"
+    class="add-more mr-auto"
+    [disableIfUnauthorized]="moduleName.User"
+    [permissionType]="permissions.create"
+    (click)="onNewUserClick()"
+  >
+    <span class="material-icons-outlined">add</span>New User
+  </a>
+  <button mat-flat-button class="btn-sm" mat-dialog-close (click)="onCancel()">Cancel</button>
+  <button
+    mat-flat-button
+    *ngIf="usersList.length > 0"
+    color="primary"
+    class="btn-sm"
+    (click)="onSave()"
+    [disabled]="selectedUsers.length === 0"
+  >
+    {{selectedUsers.length === 0 ? 'Save' : 'Update'}}
+  </button>
+</mat-dialog-actions>

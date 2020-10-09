@@ -1,0 +1,28 @@
+@import "../../../../../../../src/styles.scss";
+
+::ng-deep{
+    .upload_users{ background: #F6F6F9; border: 0.06rem #CCCCCC dashed; min-height: 13.75rem; border-radius: 0.3rem; width: 100%; display: flex; align-items: center; justify-content: center;
+        form{ display: flex; flex-direction: column; align-items: center;
+            .btn{ padding: .5rem;
+                .mat-button-wrapper{
+                    .material-icons{font-size: 3rem;}
+                    span{display: block; margin-top: 0.625rem; line-height: normal; font-size: .875rem;}
+                }
+            }
+            .mat-button-base.mat-button.mat-primary{background: transparent;}
+            .mat-progress-bar{min-width: 25rem; margin: 0.625rem 0;}
+            .upload_file_name{display: flex; align-items: center; color: #999999; font-size: .875rem; line-height: 1.1875rem;
+                a{line-height: 0.0625rem; color: $secondary-text-color;
+                    &:hover{color: $primary-color;}
+                    i{margin-left: 0.62rem; font-size: .875rem;}
+                }
+            }
+        }
+        .mat-fab.mat-transparent, .mat-flat-button.mat-transparent, .mat-mini-fab.mat-transparent, .mat-button-base.mat-button.mat-transparent, .mat-raised-button.mat-transparent{box-shadow: none;}
+    }
+    
+}
+// .tests{padding: 20px; background: $nxl-primary;}
+@media only screen and (max-width: 767px){
+    ::ng-deep .upload_users form .mat-progress-bar{min-width: 0;}
+}

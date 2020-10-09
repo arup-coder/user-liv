@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>
+  {{ title }} Group
+  <a href="javascript:void(0)" class="close-btn" mat-dialog-close (click)="onCancelGroup()"
+    ><i class="material-icons">close</i>
+  </a>
+</h2>
+<mat-dialog-content>
+  <form [formGroup]="groupAddEditForm" class="groupAddEditForm">
+    <mat-form-field appearance="legacy" class="w-100">
+      <mat-label>Group Name</mat-label>
+      <input matInput type="text" formControlName="groupName" required maxlength="20" />
+      <mat-error *ngIf="groupNameControlRequired">Group name is required.</mat-error>
+      <mat-error *ngIf="groupNameControlInvalid">Group name is Invalid.</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="legacy" class="w-100">
+      <mat-label>Group Description</mat-label>
+      <textarea matInput type="text" formControlName="groupDescription"></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button class="btn-sm" mat-dialog-close (click)="onCancelGroup()">
+    Cancel
+  </button>
+  <button
+    *ngIf="!data"
+    mat-flat-button
+    color="primary"
+    class="btn-sm"
+    (click)="onSaveGroup(groupAddEditForm)"
+    [disabled]="!groupAddEditForm.valid"
+  >
+    Save
+  </button>
+  <button
+    *ngIf="data"
+    mat-flat-button
+    color="primary"
+    class="btn-sm"
+    (click)="onUpdateGroup(groupAddEditForm)"
+    [disabled]="!groupAddEditForm.valid"
+  >
+    Update
+  </button>
+</mat-dialog-actions>

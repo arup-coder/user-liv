@@ -1,0 +1,12 @@
+<mat-grid-list cols="3" [style.background]="'white'">
+  <!-- <mat-grid-tile><lib-my-counter></lib-my-counter> </mat-grid-tile> -->
+  <mat-grid-tile
+    ><lib-material-table
+      [count]="count"
+      [elements]="elements$ | async"
+    ></lib-material-table>
+  </mat-grid-tile>
+  <mat-grid-tile
+    ><lib-reactive-form (create)="onCreate($event)"></lib-reactive-form>
+  </mat-grid-tile>
+</mat-grid-list>

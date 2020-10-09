@@ -1,0 +1,6 @@
+@import "../../../../../../../src/styles.scss";
+
+
+::ng-deep{
+    .list-header-title{@include flexbox; @include align-items($value: center); @include justify-content($value: space-between);}
+}

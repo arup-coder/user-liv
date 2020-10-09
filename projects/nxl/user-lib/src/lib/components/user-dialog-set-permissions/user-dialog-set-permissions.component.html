@@ -1,0 +1,66 @@
+<h2 mat-dialog-title>
+    Set Permissions
+    <a href="javascript:void(0)" class="close-btn" mat-dialog-close (click)="onClickCancel()"><i class="material-icons">close</i></a>
+</h2>
+<mat-dialog-content>
+    <div class="dialog-msg">
+        Please select the following role for user {{name}}
+    </div>
+    <div class="table-with-pagination">
+        <div class="table-wrapper">
+            <table mat-table [dataSource]="setPermissions">
+                <!-- Customer Name Column -->
+                <ng-container matColumnDef="moduleName">
+                    <th mat-header-cell *matHeaderCellDef>Module</th>
+                    <td mat-cell *matCellDef="let selectedPermissions" data-label="id">
+                        {{ selectedPermissions.moduleName }}
+                    </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="all">
+                    <th mat-header-cell *matHeaderCellDef>All</th>
+                    <td mat-cell *matCellDef="let selectedPermissions" data-label="id">
+                        <mat-checkbox color="primary" [checked]="getAllPermissionChecked(selectedPermissions)"
+                            (change)="onCheck($event, selectedPermissions)"></mat-checkbox>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="create">
+                    <th mat-header-cell *matHeaderCellDef>Create</th>
+                    <td mat-cell *matCellDef="let selectedPermissions" data-label="id">
+                        <mat-checkbox color="primary" [checked]="selectedPermissions.create"
+                            (change)="allSelection($event,selectedPermissions,'create')"></mat-checkbox>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="read">
+                    <th mat-header-cell *matHeaderCellDef>Read</th>
+                    <td mat-cell *matCellDef="let selectedPermissions" data-label="id">
+                        <mat-checkbox color="primary" [checked]="selectedPermissions.read"
+                            (change)="allSelection($event,selectedPermissions,'read')"></mat-checkbox>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="update">
+                    <th mat-header-cell *matHeaderCellDef>Update</th>
+                    <td mat-cell *matCellDef="let selectedPermissions" data-label="id">
+                        <mat-checkbox color="primary" [checked]="selectedPermissions.update"
+                            (change)="allSelection($event,selectedPermissions,'update')"></mat-checkbox>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="delete">
+                    <th mat-header-cell *matHeaderCellDef>Delete</th>
+                    <td mat-cell *matCellDef="let selectedPermissions" data-label="id">
+                        <mat-checkbox color="primary" [checked]="selectedPermissions.delete"
+                            (change)="allSelection($event,selectedPermissions,'delete')"></mat-checkbox>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-flat-button class="btn-sm" (click)="onClickCancel()">Cancel</button>
+    <button mat-flat-button color="primary" class="btn-sm" [disabled]="PermissionsDataChanges"
+        (click)="onClickSave(setPermissions)">Save</button>
+</mat-dialog-actions>

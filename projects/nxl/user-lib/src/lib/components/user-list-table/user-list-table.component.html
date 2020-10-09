@@ -1,0 +1,565 @@
+<div [ngClass]="!isGroupManagement ? 'body-content' : 'groupManagement'">
+  <div class="table-main-wrapper" *ngIf="usersList.length > 0">
+    <div class="table-main-filter">
+      <!-- Table filter options START -->
+      <ul class="table-main-filter__items">
+        <li *ngIf="!isGroupManagement">
+          <a href="javascript:void(0)" (click)="onClickFilter()"
+            ><i class="material-icons">filter_list</i></a
+          >
+        </li>
+        <li *ngIf="isGroupManagement">
+          <a [routerLink]="['/user/user-group-import', groupDetail.groupId]"
+            ><i class="material-icons">vertical_align_top</i></a
+          >
+        </li>
+        <li *ngIf="!isGroupManagement">
+          <a [routerLink]="['/user/user-import']"
+            ><i class="material-icons">vertical_align_top</i></a
+          >
+        </li>
+        <li *ngIf="isGroupManagement">
+          <a [routerLink]="[{ outlets: { dialog: ['user-export-csv', groupDetail.groupId] } }]"
+            ><i class="material-icons">vertical_align_bottom</i></a
+          >
+        </li>
+        <li *ngIf="!isGroupManagement">
+          <a [routerLink]="[{ outlets: { dialog: ['user-export-csv'] } }]"
+            ><i class="material-icons">vertical_align_bottom</i></a
+          >
+        </li>
+        <li>
+          <a href="javascript:void(0)" (click)="onRefresh()"
+            ><i class="material-icons">refresh</i></a
+          >
+        </li>
+        <li *ngIf="isGroupManagement">
+          <a [routerLink]="[{ outlets: { dialog: ['user-column-selection', groupDetail.groupId] } }]"
+            ><i class="material-icons">view_week</i></a
+          >
+        </li>
+        <li *ngIf="!isGroupManagement">
+          <a [routerLink]="[{ outlets: { dialog: ['user-column-selection'] } }]"
+            ><i class="material-icons">view_week</i></a
+          >
+        </li>
+      </ul>
+      <div class="table-main-filter__search">
+        <span><i class="material-icons">search</i></span>
+        <lib-user-list-search (onUserSearch)="onSearch($event)" [latestSearchText]="latestSearchText"></lib-user-list-search>
+      </div>
+
+      <div class="table-main-filter__filters" [ngClass]="{ active: userShowSelection }">
+        <!-- Action for all listed data START -->
+        <ul class="check-all-filter" *ngIf="userShowSelection">
+          <li>{{ selectedUsers.length }} user(s) selected.</li>
+          <li *ngIf="isGroupManagement">
+            <a [routerLink]="[{ outlets: { dialog: ['user-export-csv', groupDetail.groupId] } }]"
+              ><i class="material-icons">vertical_align_bottom</i></a
+            >
+          </li>
+          <li class="filter-link" *ngIf="isGroupManagement">
+             <button mat-button (click)="onRemoveUsers(selectedUsers)" class="hamburger-btn">
+              <mat-icon>
+                <i class="material-icons"> delete </i>
+              </mat-icon>
+            </button>
+          </li>
+          <li *ngIf="!isGroupManagement">
+            <a [routerLink]="[{ outlets: { dialog: ['user-export-csv'] } }]"
+              ><i class="material-icons">vertical_align_bottom</i></a
+            >
+          </li>
+          <li *ngIf="!isGroupManagement">
+            <button mat-button [matMenuTriggerFor]="menuMultiple" class="hamburger-btn">
+              <mat-icon>
+                <i class="material-icons"> more_vert </i>
+              </mat-icon>
+            </button>
+            <mat-menu #menuMultiple="matMenu">
+              <a
+                mat-menu-item
+                (click)="onClickActivateUsers('')"
+                [disableIfUnauthorized]="moduleName.User"
+                [permissionType]="permissions.update"
+              >
+                Activate
+              </a>
+              <a
+                mat-menu-item
+                 (click)="onClickDeactivateUsers('')"
+                [disableIfUnauthorized]="moduleName.User"
+                [permissionType]="permissions.delete"
+              >
+                Deactivate
+              </a>
+            </mat-menu>
+          </li>
+          <li class="filter-link">
+            <a href="javascript:void(0)" (click)="onClickUserShowSelection(false)">Hide</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Table filter options END -->
+      <lib-user-list-filter
+        [showFilters]="showFilters"
+        [clearOn]="clearOn"
+        [today]="today"
+        [filters]="filters"
+        [countries]="countries"
+        (onHideFilter)="onClickHideFilter()"
+        (onClearFilter)="onClickClearFilter()"
+        (onFilter)="onClickUserFilter($event)"
+      ></lib-user-list-filter>
+    </div>
+    <div class="table-with-pagination">
+      <div class="table-wrapper">
+        <table
+          mat-table
+          [dataSource]="usersList"
+          matSort
+          (matSortChange)="onSortData($event)"
+          [matSortActive]="sortActiveField"
+          [matSortDirection]="sortDirection"
+          cdkDropListGroup
+        >
+          <ng-container
+            [matColumnDef]="col.columnName"
+            *ngFor="let col of displayedColumns; let i = index"
+            matColumnDef="{{ col.columnName }}"
+          >
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              cdkDropList
+              cdkDropListLockAxis="x"
+              cdkDropListOrientation="horizontal"
+              (cdkDropListDropped)="dropListDropped($event, i, displayedColumns)"
+              cdkDrag
+              (cdkDragStarted)="dragStarted($event, i)"
+              [cdkDragData]="{ name: col.columnName, columIndex: i }"
+            >
+              <ng-container matColumnDef="checkbox" *ngIf="col.columnName == 'checkbox'">
+                <th>
+                  <mat-checkbox
+                    color="primary"
+                    (change)="onCheckAll($event)"
+                    [indeterminate]="isIntermediateSelect"
+                    [checked]="isSelectAll"
+                  ></mat-checkbox>
+                </th>
+              </ng-container>
+              <ng-container matColumnDef="firstName" *ngIf="col.columnName == 'firstName'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <ng-container matColumnDef="lastName" *ngIf="col.columnName == 'lastName'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+
+              <ng-container matColumnDef="email" *ngIf="col.columnName == 'email'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+
+              <ng-container
+                matColumnDef="alternateEmail"
+                *ngIf="col.columnName == 'alternateEmail'"
+              >
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <ng-container matColumnDef="jobTitle" *ngIf="col.columnName == 'jobTitle'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <ng-container matColumnDef="department" *ngIf="col.columnName == 'department'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <ng-container matColumnDef="organization" *ngIf="col.columnName == 'organization'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <ng-container matColumnDef="externalId" *ngIf="col.columnName == 'externalId'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <ng-container matColumnDef="address1" *ngIf="col.columnName == 'address1'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <ng-container matColumnDef="address2" *ngIf="col.columnName == 'address2'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <ng-container matColumnDef="address3" *ngIf="col.columnName == 'address3'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <ng-container matColumnDef="address4" *ngIf="col.columnName == 'address4'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <ng-container matColumnDef="city" *ngIf="col.columnName == 'city'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <ng-container matColumnDef="stateCode" *ngIf="col.columnName == 'stateCode'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <ng-container matColumnDef="countryCode" *ngIf="col.columnName == 'countryCode'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <ng-container matColumnDef="postalCode" *ngIf="col.columnName == 'postalCode'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <ng-container matColumnDef="mobilePhone" *ngIf="col.columnName == 'mobilePhone'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <ng-container matColumnDef="workPhone" *ngIf="col.columnName == 'workPhone'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <ng-container matColumnDef="createdDate" *ngIf="col.columnName == 'createdDate'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <ng-container matColumnDef="isRegistered" *ngIf="col.columnName == 'isRegistered'">
+                <th>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+
+              <ng-container matColumnDef="isActive" *ngIf="col.columnName == 'isActive'">
+                <th>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <!-- group management column -->
+              <ng-container matColumnDef="name" *ngIf="col.columnName === 'name'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <!-- group management column -->
+              <ng-container matColumnDef="employeeId" *ngIf="col.columnName === 'employeeId'">
+                <th>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+              <!-- group management column -->
+              <ng-container matColumnDef="dateAdded" *ngIf="col.columnName === 'dateAdded'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+
+              <!-- group management column -->
+              <ng-container matColumnDef="userName" *ngIf="col.columnName === 'userName'">
+                <th mat-sort-header>
+                  {{ col.displayColumn }}
+                </th>
+              </ng-container>
+
+              <ng-container matColumnDef="menu" *ngIf="col.columnName == 'menu'">
+                <th></th>
+              </ng-container>
+            </th>
+
+            <td mat-cell *matCellDef="let row">
+              <ng-container matColumnDef="checkbox" *ngIf="col.columnName == 'checkbox'">
+                <td>
+                  <mat-checkbox
+                    color="primary"
+                    [checked]="row.isSelected"
+                    (change)="onCheck($event, row)"
+                  >
+                  </mat-checkbox>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="firstName" *ngIf="col.columnName == 'firstName'">
+                <td>
+                  <a [routerLink]="['user-detail-view/', row.userId]" class="userLink">
+                    {{ row[col.columnName] }}
+                  </a>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="lastName" *ngIf="col.columnName == 'lastName'">
+                <td>
+                  {{ row[col.columnName] }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="email" *ngIf="col.columnName == 'email'">
+                <td>
+                  {{ row[col.columnName] }}
+                </td>
+              </ng-container>
+              <ng-container
+                matColumnDef="alternateEmail"
+                *ngIf="col.columnName == 'alternateEmail'"
+              >
+                <td>
+                  {{ row[col.columnName] }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="jobTitle" *ngIf="col.columnName == 'jobTitle'">
+                <td>
+                  {{ row[col.columnName] }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="department" *ngIf="col.columnName == 'department'">
+                <td>
+                  {{ row[col.columnName] }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="organization" *ngIf="col.columnName == 'organization'">
+                <td>
+                  {{ row[col.columnName] }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="externalId" *ngIf="col.columnName == 'externalId'">
+                <td>
+                  {{ row[col.columnName] }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="address1" *ngIf="col.columnName == 'address1'">
+                <td>
+                  {{ row[col.columnName] }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="address2" *ngIf="col.columnName == 'address2'">
+                <td>
+                  {{ row[col.columnName] }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="address3" *ngIf="col.columnName == 'address3'">
+                <td>
+                  {{ row[col.columnName] }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="address4" *ngIf="col.columnName == 'address4'">
+                <td>
+                  {{ row[col.columnName] }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="city" *ngIf="col.columnName == 'city'">
+                <td>
+                  {{ row[col.columnName] }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="stateCode" *ngIf="col.columnName == 'stateCode'">
+                <td>
+                  {{ row[col.columnName] }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="countryCode" *ngIf="col.columnName == 'countryCode'">
+                <td>
+                  {{ row[col.columnName] }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="postalCode" *ngIf="col.columnName == 'postalCode'">
+                <td>
+                  {{ row[col.columnName] }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="mobilePhone" *ngIf="col.columnName == 'mobilePhone'">
+                <td>
+                  {{ row[col.columnName] | phoneNumber }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="workPhone" *ngIf="col.columnName == 'workPhone'">
+                <td>
+                  {{ row[col.columnName] | phoneNumber }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="createdDate" *ngIf="col.columnName == 'createdDate'">
+                <td>
+                  {{ row[col.columnName] | date: 'MM/dd/yyyy' }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="isRegistered" *ngIf="col.columnName == 'isRegistered'">
+                <td>
+                  <mat-checkbox color="primary" [checked]="row.isRegistered"></mat-checkbox>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="isActive" *ngIf="col.columnName == 'isActive'">
+                <td>
+                  <span
+                    class="status_elm"
+                    [ngClass]="{
+                      active_state: row.isActive === true,
+                      inactive_state: row.isActive === false
+                    }"
+                    >{{ row[col.columnName] | status }}
+                  </span>
+                </td>
+              </ng-container>
+
+              <!-- Group table data -->
+              <ng-container matColumnDef="name" *ngIf="col.columnName === 'name'">
+                <td>
+                  <a
+                    [routerLink]="['user-detail-view/', row.userId, groupDetail.groupId]"
+                    class="userLink"
+                  >
+                    {{ row[col.columnName] }}
+                  </a>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="employeeId" *ngIf="col.columnName === 'employeeId'">
+                <td>
+                  {{ row[col.columnName] }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="dateAdded" *ngIf="col.columnName === 'dateAdded'">
+                <td>
+                  {{ row[col.columnName] | date: 'MM/dd/yyyy' }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="userName" *ngIf="col.columnName === 'userName'">
+                <td>
+                  {{ row[col.columnName] }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="menu" *ngIf="col.columnName == 'menu'">
+                <td>
+                  <button mat-button [matMenuTriggerFor]="menu" class="hamburger-btn">
+                    <mat-icon>
+                      <i class="material-icons"> more_vert </i>
+                    </mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button
+                      *ngIf="isGroupManagement"
+                      [disableIfUnauthorized]="moduleName.User"
+                      [permissionType]="permissions.read"
+                      mat-menu-item
+                      [routerLink]="['user-detail-view', row.userId, groupDetail.groupId]"
+                    >
+                      View
+                    </button>
+                    <button
+                      *ngIf="!isGroupManagement"
+                      [disableIfUnauthorized]="moduleName.User"
+                      [permissionType]="permissions.read"
+                      mat-menu-item
+                      [routerLink]="['user-detail-view', row.userId]"
+                    >
+                      View
+                    </button>
+                    <button
+                      mat-menu-item
+                      [disableIfUnauthorized]="moduleName.User"
+                      [permissionType]="permissions.update"
+                      [routerLink]="['/user/user-edit', row.userId]"
+                    >
+                      Edit
+                    </button>
+                    <div *ngIf="!isGroupManagement">
+                      <button
+                        mat-menu-item
+                        *ngIf="!row.isActive"
+                        [disableIfUnauthorized]="moduleName.User"
+                        [permissionType]="permissions.update"
+                        (click)="onClickActivateUsers( row.userId)"
+                      >
+                        Activate
+                      </button>
+
+                      <button
+                        mat-menu-item
+                        *ngIf="row.isActive"
+                        [disableIfUnauthorized]="moduleName.User"
+                        [permissionType]="permissions.delete"
+                        (click)="onClickDeactivateUsers( row.userId)"
+                      >
+                        Deactivate
+                      </button>
+                      <button
+                        mat-menu-item
+                        (click)="onPermissionSetting(row)"
+                        [disableIfUnauthorized]="moduleName.User"
+                        [permissionType]="permissions.update"
+                      >
+                        Permission
+                      </button>
+                    </div>
+
+                    <button
+                      *ngIf="isGroupManagement"
+                      mat-menu-item
+                      (click)="onRemoveUsers(row)"
+                      [disableIfUnauthorized]="moduleName.User"
+                      [permissionType]="permissions.update"
+                    >
+                      Remove
+                    </button>
+                  </mat-menu>
+                </td>
+              </ng-container>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="getDisplayedColumns(); sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: getDisplayedColumns()"></tr>
+        </table>
+      </div>
+      <mat-paginator
+        #paginator
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+        [pageSize]="pagination.pageSize"
+        (page)="onChangePageEvent($event)"
+        [length]="pagination.recordCount"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+
+  <!-- If no data -->
+  <div class="table-main-wrapper not-found" *ngIf="usersList.length === 0 && !isGroupManagement">
+    <img src="assets/images/no-data.png" alt="" />
+    <h4 class="text-center">Currently don't have any user in this tenant</h4>
+    <button mat-flat-button color="primary" class="btn-lg" routerLink="/user/user-add">
+      Create
+    </button>
+  </div>
+
+  <div class="vw-center min-height-250" fxLayout="column" *ngIf="usersList.length === 0 && isGroupManagement">
+      <p>Currently don't have any Users in this.</p>
+      <!-- <button mat-flat-button color="primary" class="btn-lg">Add User</button> -->
+  </div>
+</div>

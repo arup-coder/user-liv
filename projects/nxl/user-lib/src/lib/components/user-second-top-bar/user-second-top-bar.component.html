@@ -1,0 +1,61 @@
+<!-- Second top bar -->
+<div class="navigation-bar" fxLayout="column">
+  <div
+    class="topSecondBar"
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+    *ngIf="title !== 'Tell us a little about yourself'"
+  >
+    <h2>
+      <a
+        *ngIf="
+          title !== 'User Management' && title !== 'Group Management' && title !== 'Group Details'
+        "
+        routerLinkActive="active-link"
+        routerLink="/user/user-list"
+        class="arrow-left"
+      >
+        <span class="material-icons-outlined">keyboard_arrow_left</span>
+      </a>
+      <a
+        *ngIf="title === 'Group Details'"
+        routerLinkActive="active-link"
+        routerLink="/user/user-group-management"
+        class="arrow-left"
+      >
+        <span class="material-icons-outlined">keyboard_arrow_left</span>
+      </a>
+      {{ title }}
+    </h2>
+    <a
+      *ngIf="title === 'User Management'"
+      routerLinkActive="active-link"
+      routerLink="/user/user-add"
+      [disableIfUnauthorized]="moduleName.User"
+      [permissionType]="permissions.create"
+      class="circle-btn"
+    >
+      <span class="material-icons-outlined">add</span>
+    </a>
+    <a
+      *ngIf="title === 'Group Management'"
+      [routerLink]="[{ outlets: { dialog: ['user-group-add'] } }]"
+      [disableIfUnauthorized]="moduleName.User"
+      [permissionType]="permissions.create"
+      class="circle-btn"
+    >
+      <span class="material-icons-outlined">add</span>
+    </a>
+  </div>
+  <!-- For Registration -->
+  <div
+    class="topSecondBar"
+    *ngIf="title == 'Tell us a little about yourself'"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+  >
+    <h2>
+      {{ title }}
+    </h2>
+  </div>
+</div>

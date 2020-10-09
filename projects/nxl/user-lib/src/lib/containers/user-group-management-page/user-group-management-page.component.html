@@ -1,0 +1,28 @@
+<lib-user-second-top-bar [title]="title"></lib-user-second-top-bar>
+
+<lib-user-group-management
+  [groupList]="groupList$ | async"
+  [showFilters]="showFilters"
+  [today]="today"
+  [clearOn]="clearOn"
+  [selectedGroups]="selectedGroups"
+  (onClearFilter)="onClickClearFilter()"
+  (onFilter)="onClickFilter()"
+  (onHideFilter)="onClickHideFilter()"
+  (onGroupFilter)="onSelectFilterValues($event)"
+  [filters]="filterProperties"
+  [groupShowSelection]="groupShowSelection"
+  (onRefreshEvent)="onClickRefreshEvent($event)"
+  (onSearchGroupUser)="onClickSearchGroupUser($event)"
+  (onCheckGroup)="onCheckGroup($event)"
+  (onCheckAllGroups)="onCheckAllGroups($event)"
+  (onUpdateGroupStatus)="onClickUpdateGroupStatus($event)"
+  (onGroupShowSelection)="onClickGroupShowSelection($event)"
+  [isSelectAll]="isSelectAll"
+  [isIntermediateSelect]="isIntermediateSelect"
+  [pagination]="pagination"
+  (onPageEvent)="onClickPageEvent($event)"
+  [sortOrder]="latestSortingOrder"
+  (onSortGroupData)="onSortGroupData($event)"
+></lib-user-group-management>
+<router-outlet name="dialog"></router-outlet>

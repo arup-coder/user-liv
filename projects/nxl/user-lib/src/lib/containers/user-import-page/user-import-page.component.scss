@@ -1,0 +1,26 @@
+@import '../../../../../../../src/styles.scss';
+
+::ng-deep {
+  .stepper-mini-style.mat-stepper-horizontal{background: none; overflow: hidden;}
+  .import-data {
+    h4 {
+      margin-bottom: 1.0625rem;
+    }
+    p {
+      font-size: 0.875rem;
+      color: $secondary-text-color;
+      line-height: 1.375rem;
+      margin: 0 0 2rem 0;
+    }
+    .btn.btn-lg {
+      min-width: 15.625rem;
+      color: $primary-color;
+      .mat-button-wrapper {
+        font-size: 0.875rem;
+        .material-icons {
+          margin-right: 0.4rem;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@import "../../../../../../../src/styles.scss";
+
+.settings-component{
+    h6{font-size: 0.875rem; margin-bottom: 1.125rem;}
+    .settings-list{width: 100%;
+        li{display: flex; align-items: center; justify-content: space-between; padding: 0.875rem 0; border-top: 1px #E5E5E5 solid; font-size: 0.875rem;}
+        li:last-child{border-bottom: 1px #E5E5E5 solid;;}
+    }
+}

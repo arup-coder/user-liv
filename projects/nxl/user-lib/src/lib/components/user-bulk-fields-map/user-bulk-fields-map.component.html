@@ -1,0 +1,134 @@
+<mat-card class="mat-elevation-z map-fields">
+  <h4>Mapping Filds</h4>
+  <p>Select the CSV fields to import, then set how would you like these converted to fields</p>
+
+  <div class="map-fields__wrap">
+    <div class="overflows">
+      <div fxLayout="row" class="map-fields__heading">
+        <div fxFlex="35">CSV Fields</div>
+        <div fxFlex="60">IRS Fields</div>
+      </div>
+      <form [formGroup]="mapForm" class="mapForm">
+        <div *ngFor="let mappingValue of mappingValues.csvFields; let index = index" fxLayout="row">
+          <mat-label class="overflows__label" fxFlex="35">{{ mappingValue }}</mat-label>
+          <mat-form-field
+            appearance="legacy"
+            color="accent"
+            *ngIf="
+              mappingValue.includes('*') &&
+              mappingValue !== 'Mobile Phone*' &&
+              mappingValue !== 'Work Phone'
+            "
+          >
+            <mat-label>Select IRS Fields</mat-label>
+            <mat-select formControlName="{{ mappingValue }}" required>
+              <mat-option
+                (click)="onSelection(irsField, mappingValue, i);"
+                *ngFor="let irsField of mappingValues.irsFields; let i = index"
+                [value]="irsField === '-- None --' ? null : irsField"
+              >
+                {{ irsField }}
+              </mat-option>
+            </mat-select>
+            <i class="material-icons">keyboard_arrow_down</i>
+            <mat-error *ngIf="mapForm.get(mappingValue).hasError('required')"
+              >This field is required.</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field
+            appearance="legacy"
+            color="accent"
+            *ngIf="
+              !mappingValue.includes('*') &&
+              mappingValue !== 'Mobile Phone*' &&
+              mappingValue !== 'Work Phone'
+            "
+          >
+            <mat-label>Select IRS Fields</mat-label>
+            <mat-select>
+              <mat-option
+                (click)="onSelection(irsField, mappingValue, i)"
+                *ngFor="let irsField of mappingValues.irsFields; let i = index"
+                [value]="irsField"
+              >
+                {{ irsField }}
+              </mat-option>
+            </mat-select>
+            <i class="material-icons">keyboard_arrow_down</i>
+          </mat-form-field>
+          <mat-form-field
+            appearance="legacy"
+            color="accent"
+            *ngIf="mappingValue === 'Mobile Phone*' && mappingValue !== 'Work Phone'"
+          >
+            <mat-label>Select IRS Fields</mat-label>
+            <mat-select
+              required
+              formControlName="Mobile Phone*"
+              (selectionChange)="onSelectValue($event);"
+            >
+              <mat-option
+                (click)="onSelection(irsField, mappingValue, i)"
+                *ngFor="let irsField of mappingValues.irsFields; let i = index"
+                [value]="irsField === '-- None --' ? null : irsField"
+              >
+                {{ irsField }}
+              </mat-option>
+            </mat-select>
+            <i class="material-icons">keyboard_arrow_down</i>
+            <!-- <mat-error *ngIf="mobilePhoneControl.hasError('invalid')"
+              >This field only accepts numeric-values up to 10 digits.</mat-error
+            >-->
+            <mat-error *ngIf="mobilePhoneControlRequired"
+              >This field is required.</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field
+            appearance="legacy"
+            color="accent"
+            *ngIf="mappingValue === 'Mobile Phone' && mappingValue !== 'Work Phone'"
+          >
+            <mat-label>Select IRS Fields</mat-label>
+            <mat-select formControlName="Mobile Phone">
+              <mat-option
+                (click)="onSelection(irsField, mappingValue, i)"
+                *ngFor="let irsField of mappingValues.irsFields; let i = index"
+                [value]="irsField"
+              >
+                {{ irsField }}
+              </mat-option>
+            </mat-select>
+            <!-- <i class="material-icons">keyboard_arrow_down</i>
+            <mat-error *ngIf="mobilePhoneControl.hasError('invalid')"
+              >This field only accepts numeric-values up to 10 digits.</mat-error
+            > -->
+          </mat-form-field>
+          <mat-form-field
+            appearance="legacy"
+            color="accent"
+            *ngIf="
+              mappingValue === 'Work Phone' &&
+              mappingValue !== 'Mobile Phone' &&
+              !mappingValue.includes('*')
+            "
+          >
+            <mat-label>Select IRS Fields</mat-label>
+            <mat-select formControlName="Work Phone" (selectionChange)="onSelectWorkPhone($event);">
+              <mat-option
+                (click)="onSelection(irsField, mappingValue, i)"
+                *ngFor="let irsField of mappingValues.irsFields; let i = index"
+                [value]="irsField"
+              >
+                {{ irsField }}
+              </mat-option>
+            </mat-select>
+            <i class="material-icons">keyboard_arrow_down</i>
+            <!-- <mat-error *ngIf="workPhoneControl.hasError('invalid')"
+              >This field only accepts numeric-values up to 10 digits.</mat-error
+            > -->
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+  </div>
+</mat-card>

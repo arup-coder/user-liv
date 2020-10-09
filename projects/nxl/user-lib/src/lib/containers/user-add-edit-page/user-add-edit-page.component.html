@@ -1,0 +1,6 @@
+<lib-user-second-top-bar [title]="title" [selectedUserId]="selectedUserId"></lib-user-second-top-bar>
+<lib-user-add-edit (onAddUser)="onCreateUser($event)" (onUpdateUser)="onUpdateUser($event)"
+ (onCancel)="onCancel()" (onSelectUserCountry)="onSelectCountry($event)"
+  [userDetail]="userDetail$ | async" [countryList]="countryList" 
+  [stateList]="stateList">
+</lib-user-add-edit>

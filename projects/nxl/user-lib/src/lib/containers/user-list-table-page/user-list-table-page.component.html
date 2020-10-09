@@ -1,0 +1,42 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav-content>
+    <lib-user-second-top-bar [title]="title"></lib-user-second-top-bar>
+    <lib-user-list-table #userTable
+      [usersList]="usersList$ | async"
+      [displayedColumns]="displayedColumns$ | async"
+      [pagination]="pagination"
+      [sortOrder]="latestSortingOrder"
+      [showFilters]="showFilters"
+      [clearOn]="clearOn"
+      [today]="today"
+      [filters]="filterProperties"
+      (onFilter)="onClickFilter()"
+      (onClearFilter)="onClickClearFilter()"
+      (onHideFilter)="onClickHideFilter()"
+      (onUserShowSelection)="onClickUserShowSelection($event)"
+      (onUserFilter)="onSelectFilterValues($event)"
+      (onSortUserData)="onSortUserData($event)"
+      (onPageEvent)="onClickPageEvent($event)"
+      (onRefreshEvent)="onClickRefreshEvent($event)"
+      (onSearchUser)="onClickSearchUser($event)"
+      (ondropListDropped)="dropListDropped($event)"
+      [userShowSelection]="userShowSelection"
+      [countries]="countries"
+      (onActivateUsers)="onClickActivateUser($event)"
+      (onDeactivateUsers)="onClickDeactivateUser($event)"
+      (onCheckUser)="onCheck($event)"
+      (onSelectPermissions)="onSelectPermissions($event)"
+      (onCheckAllUsers)="onCheckAll($event)"
+      [selectedUsers]="selectedUsers"
+      [isSelectAll]="isSelectAll"
+      [latestSearchText]="latestSearch"
+      [isIntermediateSelect]="isIntermediateSelect"
+      [isGroupManagement]="isGroupManagement"
+    >
+    </lib-user-list-table>
+  </mat-sidenav-content>
+  <mat-sidenav mode="over" position="end" [opened]="opened" disableClose="true">
+    <router-outlet (activate)="activateRoute()" (deactivate)="deactivateRoute()"></router-outlet>
+  </mat-sidenav>
+  <router-outlet name="dialog"></router-outlet>
+</mat-sidenav-container>

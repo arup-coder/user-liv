@@ -1,0 +1,68 @@
+<div class="table-main-filter__filters" [ngClass]="{ active: showFilters }">
+  <form [formGroup]="filterForm" class="filterForm">
+    <!-- Table Sub filter options START -->
+    <ul *ngIf="showFilters">
+      <li>
+        <a href="javascript:void(0)" (click)="onClickHideFilter()" class="active"><i
+            class="material-icons">filter_list</i></a>
+      </li>
+      <li *ngFor="let filter of filters">
+        <button mat-stroked-button color="accent" class="btn btn-sm" [matMenuTriggerFor]="status"
+          [ngClass]="filter.newTitle ? 'active': ''">
+          {{ filter.newTitle ? filter.newTitle : filter.displayTitle }}
+        </button>
+        <mat-menu #status="matMenu">
+          <div *ngIf="filter.title !== 'CountryCode'">
+            <button mat-menu-item *ngFor="let value of filter.dataSource"
+              (click)="onSelectFilter(filter.title, value )">
+              {{ value.displayValue }}
+            </button>
+          </div>
+          <div *ngIf="filter.title === 'CountryCode'">
+            <button mat-menu-item *ngFor="let value of countries"
+              (click)="onSelectFilter(filter.title, { value : value.code , displayValue : value.name} )">
+              {{ value.name }}
+            </button>
+          </div>
+        </mat-menu>
+      </li>
+      <li>
+        <div class="table-main-filter__datepick">
+          <input matInput color="accent" [matDatepicker]="createdDate" formControlName="createdDate"
+            placeholder="Created" [max]="today"
+            (dateChange)="onSelectDateFilter('Created',$event.targetElement.value)" />
+          <mat-datepicker-toggle matSuffix [for]="createdDate"></mat-datepicker-toggle>
+          <mat-datepicker #createdDate [disabled]="false"></mat-datepicker>
+        </div>
+      </li>
+      <!-- <li>
+        <div class="table-main-filter__datepick">
+          <input matInput [matDatepicker]="w9Receivedate" formControlName="w9ReceiveDate" placeholder="W9 Received Date"
+            [max]="today" (dateChange)="onSelectDateFilter('ReceivedDate', $event.targetElement.value)" />
+          <mat-datepicker-toggle matSuffix [for]="w9Receivedate"></mat-datepicker-toggle>
+          <mat-datepicker #w9Receivedate [disabled]="false"></mat-datepicker>
+        </div>
+      </li> -->
+      <li class="filter-link" *ngIf="clearOn">
+        <a href="javascript:void(0)" (click)="onClickClearFilter()">Clear Filter</a>
+      </li>
+      <li class="filter-link">
+        <a href="javascript:void(0)" (click)="onClickHideFilter()">Hide</a>
+      </li>
+    </ul>
+  </form>
+  <!-- Table Sub filter options END -->
+
+  <!-- Action for all listed data START -->
+  <!-- <ul class="check-all-filter">
+    <li>4 Items Selected</li>
+    <li>
+      <a href="javascript:void(0)"><i class="material-icons">delete_outline</i></a>
+    </li>
+    <li>
+      <a href="javascript:void(0)"><i class="material-icons">more_vert</i></a>
+    </li>
+  </ul> -->
+  <!-- Action for all listed data END -->
+
+</div>

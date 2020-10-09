@@ -1,0 +1,53 @@
+<div class="table-main-filter__filters" [ngClass]="{ active: showFilters }">
+  <form [formGroup]="filterForm" class="filterForm">
+    <!-- Table Sub filter options START -->
+    <ul *ngIf="showFilters">
+      <li>
+        <a href="javascript:void(0)" (click)="onClickHideFilter()" class="active"
+          ><i class="material-icons">filter_list</i></a
+        >
+      </li>
+      <li *ngFor="let filter of filters">
+        <button
+          mat-stroked-button
+          color="accent"
+          class="btn btn-sm"
+          [matMenuTriggerFor]="status"
+          [ngClass]="filter.newTitle ? 'active' : ''"
+        >
+          {{ filter.newTitle ? filter.newTitle : filter.displayTitle }}
+        </button>
+        <mat-menu #status="matMenu">
+          <button
+            mat-menu-item
+            *ngFor="let value of filter.dataSource"
+            (click)="onSelectFilter(filter.title, value)"
+          >
+            {{ value.displayValue }}
+          </button>
+        </mat-menu>
+      </li>
+      <li>
+        <div class="table-main-filter__datepick">
+          <input
+            matInput
+            color="accent"
+            [matDatepicker]="createdDate"
+            formControlName="createdDate"
+            placeholder="Created"
+            [max]="today"
+            (dateChange)="onSelectDateFilter('Created', $event.targetElement.value)"
+          />
+          <mat-datepicker-toggle matSuffix [for]="createdDate"></mat-datepicker-toggle>
+          <mat-datepicker #createdDate [disabled]="false"></mat-datepicker>
+        </div>
+      </li>
+      <li class="filter-link" *ngIf="clearOn">
+        <a href="javascript:void(0)" (click)="onClickClearFilter()">Clear Filter</a>
+      </li>
+      <li class="filter-link">
+        <a href="javascript:void(0)" (click)="onClickHideFilter()">Hide</a>
+      </li>
+    </ul>
+  </form>
+</div>

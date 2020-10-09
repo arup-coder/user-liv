@@ -1,0 +1,47 @@
+<div class="element-form">
+    <form [formGroup]="form" class="form">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        formControlName="name"
+        placeholder="Name"
+        class="element-form__input"
+        [class.error]="nameControlInvalid"
+      />
+      <div class="element-form__error" *ngIf="nameControlInvalid">
+        <p>Must have a name</p>
+      </div>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        formControlName="weight"
+        placeholder="Weight"
+        class="element-form__input"
+        [class.error]="weightControlInvalid"
+      />
+      <div class="element-form__error" *ngIf="weightControlInvalid">
+        <p>Must have a weight</p>
+      </div>
+      <div class="element-form__error" *ngIf="weightControlThresholdInvalid">
+        <p>Must have a weight less than 100</p>
+      </div>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        formControlName="symbol"
+        placeholder="Symbol"
+        class="element-form__input"
+        [class.error]="symbolControlInvalid"
+      />
+      <div class="element-form__error" *ngIf="symbolControlInvalid">
+        <p>Must have a symbol</p>
+      </div>
+    </mat-form-field>
+    <button mat-flat-button color="primary" (click)="createElement(form)">Create Element</button>
+    </form>
+</div>

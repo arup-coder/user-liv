@@ -1,0 +1,13 @@
+@import "../../../../../../../src/styles.scss";
+
+::ng-deep{
+    .mat-form-field{width: 100%;}
+}
+
+::ng-deep {
+    .basic-profile{
+        .mat-card > h4{@include flexbox; @include align-items($value: center);
+            a{margin-left: auto;}
+        }
+    }
+}

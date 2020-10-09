@@ -1,0 +1,32 @@
+<div class="upload_users">
+  <form enctype="multipart/form-data">
+    <button mat-button color="transparent" class="btn" (click)="fileInput.click()">
+      <i class="material-icons">file_upload</i>
+      <span>Upload CSV File</span>
+    </button>
+    <a href="" class="tests"></a>
+    <input
+      type="file"
+      #fileInput
+      name="fileUpload"
+      (change)="onFileInput($event.target.files)"
+      data-max-size="2048"
+      accept=".csv,.numbers,.xlsx"
+      class="hide"
+        [disableIfUnauthorized]="moduleName.User" [permissionType]="permissions.create"
+    />
+
+    <!-- <mat-progress-bar
+      mode="indeterminate"
+      color="accent"
+      [value]="40"
+      [value]=progress.loaded
+    ></mat-progress-bar> -->
+    <div class="upload_file_name">
+      {{ fileName }}
+      <a *ngIf="fileName" href="javascript:void(0)" (click)="onCancelFileUpload()"
+        ><i class="material-icons">cancel</i></a
+      >
+    </div>
+  </form>
+</div>

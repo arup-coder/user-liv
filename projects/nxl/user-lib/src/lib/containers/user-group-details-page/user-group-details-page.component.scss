@@ -1,0 +1,7 @@
+@import "../../../../../../../src/styles.scss";
+
+::ng-deep {
+    .mat-dialog-container {
+        ::ng-deep .table-wrapper{overflow: auto; max-height: 45vh !important;}
+    }
+}

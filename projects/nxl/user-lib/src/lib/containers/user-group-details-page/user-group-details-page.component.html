@@ -1,0 +1,44 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav-content>
+    <lib-user-second-top-bar [title]="title"></lib-user-second-top-bar>
+    <div class="body-content">
+      <lib-user-group-details [groupDetail]="groupDetail"></lib-user-group-details>
+      <mat-card class="data-card mat-elevation-z">
+        <h4>
+          Users - {{ totalUsers }}
+          <div class="right-element">
+            <a href="javascript:void(0)" class="add-item-link" (click)="onAddUserClick()">
+              <span class="material-icons-outlined">add</span> {{totalUsers === 0 ? 'Add Users' : 'Update Users'}}
+            </a>
+          </div>
+        </h4>
+        <lib-user-list-table
+          #userTable
+          [isGroupManagement]="isGroupManagement"
+          [groupDetail]="groupDetail"
+          [usersList]="usersList$ | async"
+          [displayedColumns]="displayedColumns$ | async"
+          [pagination]="pagination"
+          [sortOrder]="latestSortingOrder"
+          (onPageEvent)="onClickPageEvent($event)"
+          (onRefreshEvent)="onClickRefreshEvent($event)"
+          (onSortUserData)="onSortGroupedUserData($event)"
+          (onCheckUser)="onCheck($event)"
+          (onCheckAllUsers)="onCheckAll($event)"
+          [isSelectAll]="isSelectAll"
+          [isIntermediateSelect]="isIntermediateSelect"
+          [selectedUsers]="selectedUsers"
+          (onUserShowSelection)="onClickUserShowSelection($event)"
+          [userShowSelection]="userShowSelection"
+          (onClickRemoveUsers)="onClickRemoveUsers($event)"
+          (onSearchUser)="onClickSearchUser($event)"
+        >
+        </lib-user-list-table>
+      </mat-card>
+    </div>
+  </mat-sidenav-content>
+  <mat-sidenav mode="over" position="end" [opened]="opened" disableClose="true">
+    <router-outlet (activate)="activateRoute()" (deactivate)="deactivateRoute()"></router-outlet>
+  </mat-sidenav>
+  <router-outlet name="dialog"></router-outlet>
+</mat-sidenav-container>

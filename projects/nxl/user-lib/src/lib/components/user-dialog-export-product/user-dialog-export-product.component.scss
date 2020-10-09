@@ -1,0 +1,7 @@
+@import "../../../../../../../src/styles.scss";
+
+p{margin: 0 0 1.563rem 0;}
+.exp-cell{margin: 0.935rem 0;
+    h4{font-weight: 500;}
+    .mat-radio-group{@include flexbox; @include align-items($value: flex-start); @include flex-direction($value: column);}
+}

@@ -1,0 +1,225 @@
+<form [formGroup]="profileForm">
+  <div class="form-field-content">
+    <mat-card class="mat-elevation-z">
+      <h4>
+        Basic Details
+        <a href="javascript:void(0)" [disableIfUnauthorized]="moduleName.User"
+         [permissionType]="permissions.update"
+          (click)="onClickBasicDetails()">
+          <span class="material-icons-outlined">
+            edit</span></a>
+      </h4>
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-sm="5px">
+        <div fxFlex="33.33333333" fxFlex.lt-sm="100">
+          <mat-form-field appearance="legacy" color="primary">
+            <mat-label>First Name</mat-label>
+            <input matInput type="text" formControlName="firstName" placeholder="First Name" maxlength="50" required
+              readonly [readOnly]="readonly" />
+            <mat-error *ngIf="firstNameControlInvalid">First name is Invalid.</mat-error>
+            <mat-error *ngIf="firstNameControlRequired">First name is required.</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="33.33333333" fxFlex.lt-sm="100">
+          <mat-form-field appearance="legacy" color="primary">
+            <mat-label>Last Name</mat-label>
+            <input matInput type="text" formControlName="lastName" placeholder="Last Name" maxlength="50" required
+              readonly [readOnly]="readonly" />
+            <mat-error *ngIf="lastNameControlRequired">Last name is required.</mat-error>
+            <mat-error *ngIf="lastNameControlInvalid">Last name is Invalid.</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="33.33333333" class="mb-space-5" fxFlex.lt-sm="100">
+          <mat-form-field appearance="legacy" color="primary">
+            <mat-label> Employee Id</mat-label>
+            <input matInput   formControlName="externalId" placeholder="Employee Id" required readonly
+            maxlength="50">
+            <mat-error *ngIf="externalIdControlRequired">Employee Id is required.</mat-error>
+            <mat-error *ngIf="externalIdControlInvalid">Employee Id is Invalid.</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-sm="5px">
+        <div fxFlex="33.33333333" fxFlex.lt-sm="100">
+          <mat-form-field appearance="legacy" color="primary">
+            <mat-label>Email</mat-label>
+            <input matInput type="text" formControlName="email" placeholder="Email" readonly    maxlength="100" />
+          </mat-form-field>
+        </div>
+        <div fxFlex="33.33333333" fxFlex.lt-sm="100">
+          <mat-form-field appearance="legacy" color="primary">
+            <mat-label>Alternate Email</mat-label>
+            <input matInput type="text" formControlName="alternateEmail" placeholder="Alternate Email"
+             required readonly   maxlength="100" 
+              [readOnly]="readonly" />
+            <mat-error *ngIf="alternateEmailControlInvalid">Alternate Email is Invalid.</mat-error>
+            <mat-error *ngIf="alternateEmailControlRequired">Alternate Email is required.</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="33.33333333" fxFlex.lt-sm="100">
+          <mat-form-field appearance="legacy" color="primary">
+            <mat-label>Job Title</mat-label>
+            <input matInput type="text" formControlName="jobTitle" placeholder="Job Title" maxlength="100" readonly
+              [readOnly]="readonly" />
+            <mat-error *ngIf="jobTitleControlInvalid">Job Title is Invalid.</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-sm="5px">
+        <div fxFlex="33.33333333" class="mb-space-5" fxFlex.lt-sm="100">
+          <mat-form-field appearance="legacy" color="primary">
+            <mat-label>Department</mat-label>
+            <input matInput type="text" formControlName="department" placeholder="Department" maxlength="100" readonly [readOnly]="readonly"  />
+            <mat-error *ngIf="departmentControlInvalid">Department is Invalid.</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="33.33333333" fxFlex.lt-sm="100">
+          <mat-form-field appearance="legacy" color="primary">
+            <mat-label>Company</mat-label>
+            <input matInput type="text" formControlName="organization" placeholder="Company" readonly maxlength="100"
+              [readOnly]="readonly"  />
+          </mat-form-field>
+        </div>
+        <div fxFlex="33.33333333" fxFlex.lt-sm="100">
+          <mat-form-field appearance="legacy" color="primary">
+            <mat-label>Country</mat-label>
+            <mat-select formControlName="countryCode" [disabled]="readonly" required  (selectionChange)="onSelectCountry()">
+            <mat-option *ngFor="let country of countryList" [value]="country.code">
+              {{country.name}}
+            </mat-option>
+            </mat-select>
+            <i class="material-icons">keyboard_arrow_down</i>
+            <mat-error *ngIf="countryCodeControlInvalid">Country is Invalid.</mat-error>
+            <mat-error *ngIf="countryCodeControlRequired">Country is required.</mat-error>
+          </mat-form-field>
+        </div>
+        <!-- <div fxFlex="33.33333333" fxFlex.lt-sm="100">
+          <mat-form-field color="primary">
+            <mat-label>W9 Received Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="receivedDate"
+              formControlName="receivedDate"
+              placeholder="mm/dd/yyyy"
+              readonly
+              [readOnly]="readonly"
+            />
+            <mat-datepicker-toggle matSuffix [for]="receivedDate"></mat-datepicker-toggle>
+            <mat-datepicker #receivedDate></mat-datepicker>
+            <mat-error *ngIf="receivedDate">W9 Received Date is Invalid.</mat-error>
+          </mat-form-field>
+        </div> -->
+      </div>
+    </mat-card>
+    <mat-card class="mat-elevation-z">
+      <h4>
+        Address
+        <a href="javascript:void(0)" [disableIfUnauthorized]="moduleName.User"
+        [permissionType]="permissions.update"
+          (click)="onClickAddressDetail()">
+          <span class="material-icons-outlined">edit</span></a>
+      </h4>
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-sm="5px">
+        <div fxFlex="33.33333333" fxFlex.lt-sm="100">
+          <mat-form-field appearance="legacy" color="primary">
+            <mat-label>Address1</mat-label>
+            <input matInput type="text" formControlName="address1" placeholder="Address1" readonly maxlength="100"
+              [readOnly]="readonlyaddress" />
+          </mat-form-field>
+        </div>
+        <div fxFlex="33.33333333" fxFlex.lt-sm="100">
+          <mat-form-field appearance="legacy" color="primary">
+            <mat-label>Address2</mat-label>
+            <input matInput type="text" formControlName="address2" placeholder="Address2" readonly maxlength="100"
+              [readOnly]="readonlyaddress" />
+          </mat-form-field>
+        </div>
+        <div fxFlex="33.33333333" fxFlex.lt-sm="100">
+          <mat-form-field appearance="legacy" color="primary">
+            <mat-label>Address3</mat-label>
+            <input matInput type="text" formControlName="address3" placeholder="Address3" readonly maxlength="100"
+              [readOnly]="readonlyaddress" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-sm="5px">
+        <div fxFlex="33.33333333" fxFlex.lt-sm="100">
+          <mat-form-field appearance="legacy" color="primary">
+            <mat-label>Address4</mat-label>
+            <input matInput type="text" formControlName="address4" placeholder="Address4" maxlength="100" readonly
+              [readOnly]="readonlyaddress" />
+          </mat-form-field>
+        </div>
+        <div fxFlex="33.33333333" fxFlex.lt-sm="100">
+          <mat-form-field appearance="legacy" color="primary">
+            <mat-label>City</mat-label>
+            <input matInput type="text" formControlName="city" placeholder="City" readonly [readOnly]="readonlyaddress"
+              maxlength="50" />
+          </mat-form-field>
+        </div>
+        <div fxFlex="33.33333333" fxFlex.lt-sm="100">
+          <mat-form-field appearance="legacy" color="primary">
+            <mat-label>State</mat-label>
+            <mat-select formControlName="stateCode" [disabled]="readonlyaddress">
+            <mat-option *ngFor="let state of stateList" [value]="state.stateCode">
+              {{state.stateName}}
+            </mat-option>
+            </mat-select>
+            <i class="material-icons">keyboard_arrow_down</i>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-sm="5px">
+        <div fxFlex="33.33333333" fxFlex.lt-sm="100">
+          <mat-form-field appearance="legacy" color="primary">
+            <mat-label>ZipCode</mat-label>
+            <input matInput type="text" formControlName="postalCode" placeholder="ZipCode" readonly
+              [readOnly]="readonlyaddress" maxlength="20" />
+          </mat-form-field>
+        </div>
+        <div fxFlex="33.33333333" fxFlex.lt-sm="100"></div>
+        <div fxFlex="33.33333333" fxFlex.lt-sm="100"></div>
+      </div>
+    </mat-card>
+    <mat-card class="mat-elevation-z mb-50">
+      <h4>
+        Phone
+        <a href="javascript:void(0)" (click)="onClickphone()" [disableIfUnauthorized]="moduleName.User"
+          [permissionType]="permissions.update"><span class="material-icons-outlined">edit</span></a>
+      </h4>
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px" fxLayoutGap.lt-sm="5px">
+        <div fxFlex="33.33333333" fxFlex.lt-sm="100">
+          <mat-form-field appearance="legacy" color="primary">
+            <mat-label>WorkPhone</mat-label>
+            <input matInput formControlName="workPhone" placeholder="Work Phone" maxlength="20"
+              [value]="profileForm.get('workPhone').value | phoneNumber" readonly [readOnly]="readonlyPhone" />
+            <mat-error *ngIf="workPhoneControlInvalid">Work phone is Invalid.</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="33.33333333" fxFlex.lt-sm="100">
+          <mat-form-field appearance="legacy" color="primary">
+            <mat-label>Mobile Phone</mat-label>
+            <input matInput formControlName="mobilePhone" placeholder="Mobile Number" maxlength="20"
+              [value]="profileForm.get('mobilePhone').value | phoneNumber" required readonly
+              [readOnly]="readonlyPhone" />
+            <mat-error *ngIf="mobilePhoneControlInvalid">Mobile phone is Invalid.</mat-error>
+            <mat-error *ngIf="mobilePhoneControlRequired">Mobile phone is required.</mat-error>
+            <!-- <mat-error *ngIf="mobilePhoneControlInvalidLength"
+              >Mobile phone should contain 10 digits.</mat-error
+            > -->
+          </mat-form-field>
+        </div>
+        <div fxFlex="33.33333333" fxFlex.lt-sm="100"></div>
+      </div>
+    </mat-card>
+  </div>
+  <div class="form-submit-action">
+    <button mat-flat-button class="btn-lg" routerLink="/home">Cancel</button>
+
+    <button mat-flat-button color="primary" [disabled]="!profileForm.valid" class="btn-lg"
+      (click)="onClickSaveUser(profileForm)">
+      Save
+    </button>
+  </div>
+</form>

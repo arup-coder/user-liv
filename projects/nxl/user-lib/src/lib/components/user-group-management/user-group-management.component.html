@@ -1,0 +1,178 @@
+<div class="body-content">
+  <div class="table-main-wrapper">
+    <div class="table-main-filter">
+      <!-- Table filter options START -->
+      <ul class="table-main-filter__items">
+        <li>
+          <a href="javascript:void(0)" (click)="onClickFilter()"
+            ><i class="material-icons">filter_list</i></a
+          >
+        </li>
+        <li>
+          <a href="javascript:void(0)" (click)="onRefresh()"
+            ><i class="material-icons">refresh</i></a
+          >
+        </li>
+        <!-- <li>
+          <a href="javascript:void(0)"><i class="material-icons">view_week</i></a>
+        </li> -->
+      </ul>
+      <div class="table-main-filter__search">
+        <span><i class="material-icons">search</i></span>
+        <lib-user-group-list-search (onGroupSearch)="onSearch($event)"></lib-user-group-list-search>
+      </div>
+      <div class="table-main-filter__filters" [ngClass]="{ active: groupShowSelection }">
+        Action for all listed data START
+        <ul class="check-all-filter" *ngIf="groupShowSelection">
+          <li>{{ selectedGroups.length }} groups(s) selected.</li>
+          <li>
+            <button mat-button [matMenuTriggerFor]="menuMultiple" class="hamburger-btn">
+              <mat-icon>
+                <i class="material-icons"> more_vert </i>
+              </mat-icon>
+            </button>
+            <mat-menu #menuMultiple="matMenu">
+              <a mat-menu-item (click)="onUpdateStatus(true, '')">
+                Activate
+              </a>
+              <a mat-menu-item (click)="onUpdateStatus(false, '')">
+                Deactivate
+              </a>
+            </mat-menu>
+          </li>
+          <li class="filter-link">
+            <a href="javascript:void(0)" (click)="onClickGroupShowSelection(false)">Hide</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Table filter options END -->
+      <lib-user-group-list-filter
+        [showFilters]="showFilters"
+        [clearOn]="clearOn"
+        [today]="today"
+        [filters]="filters"
+        (onHideFilter)="onClickHideFilter()"
+        (onClearFilter)="onClickClearFilter()"
+        (onFilter)="onClickGroupFilter($event)"
+      ></lib-user-group-list-filter>
+    </div>
+    <div class="table-with-pagination">
+      <div class="table-wrapper">
+        <table
+          mat-table
+          [dataSource]="groupList"
+          matSort
+          matSortDirection="asc"
+          matSortActive="groupName"
+          (matSortChange)="onSortData($event)"
+        >
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="checkbox">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox
+                color="primary"
+                (change)="onCheckAll($event)"
+                [indeterminate]="isIntermediateSelect"
+                [checked]="isSelectAll"
+              ></mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let group">
+              <mat-checkbox
+                color="primary"
+                [checked]="group.isSelected"
+                (change)="onCheck($event, group)"
+              >
+              </mat-checkbox>
+            </td>
+          </ng-container>
+          <!-- Group Name -->
+          <ng-container matColumnDef="groupName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Group Name</th>
+            <td mat-cell *matCellDef="let group">
+              <a [routerLink]="['/user/user-group-details/', group.groupId]" class="userLink">
+                {{ group.groupName }}
+              </a>
+            </td>
+          </ng-container>
+
+          <!-- Group Decription -->
+          <ng-container matColumnDef="groupDescription">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Group Description</th>
+            <td mat-cell *matCellDef="let group">{{ group.groupDescription }}</td>
+          </ng-container>
+
+          <!-- Total User -->
+          <ng-container matColumnDef="totalUsers">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Users</th>
+            <td mat-cell *matCellDef="let group">{{ group.totalUsers }}</td>
+          </ng-container>
+
+          <!-- Created Date -->
+          <ng-container matColumnDef="createdDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Created Date</th>
+            <td mat-cell *matCellDef="let group">{{ group.createdDate | date: 'MM/dd/yyyy' }}</td>
+          </ng-container>
+
+          <!-- Status -->
+          <ng-container matColumnDef="isActive">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+            <td mat-cell *matCellDef="let group">
+              <span
+                class="status_elm"
+                [ngClass]="{
+                  active_state: group.isActive === true,
+                  inactive_state: group.isActive === false
+                }"
+                >{{ group | status }}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="menu">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let group">
+              <button mat-button [matMenuTriggerFor]="menu" class="hamburger-btn">
+                <mat-icon>
+                  <i class="material-icons"> more_vert </i>
+                </mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item [routerLink]="['/user/user-group-details/', group.groupId]">
+                  View
+                </button>
+                <button mat-menu-item [routerLink]="[{ outlets: { dialog: ['user-group-edit', group.groupId] } }]">
+                  Edit
+                </button>
+                <button
+                  mat-menu-item
+                  *ngIf="!group.isActive"
+                  (click)="onUpdateStatus(!group.isActive, group.groupId)"
+                >
+                  Activate
+                </button>
+                <button
+                  mat-menu-item
+                  *ngIf="group.isActive"
+                  (click)="onUpdateStatus(!group.isActive, group.groupId)"
+                >
+                  DeActivate
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+      <mat-paginator
+        #paginator
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+        [pageSize]="pagination.pageSize"
+        (page)="onChangePageEvent($event)"
+        [length]="pagination.recordCount"
+      ></mat-paginator>
+    </div>
+  </div>
+</div>

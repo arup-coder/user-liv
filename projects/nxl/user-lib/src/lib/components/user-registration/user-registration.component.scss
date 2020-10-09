@@ -1,0 +1,13 @@
+@import "../../../../../../../src/styles.scss";
+
+.mat-form-field{width: 100%;}
+.form-submit-action{ @include flexbox; @include align-items($value: center); @include justify-content(flex-end);}
+.mat-error{color: #FF0000;}
+.row{@include flexbox; margin: 0 -0.625rem; flex-wrap: wrap;}
+.col-50{flex: 0 0 50%; max-width: 50%; padding: 0 0.625rem;}
+.checkOpt{padding-bottom: 1.65rem;}
+
+@media only screen and (max-width: 767px){
+    .row{flex-direction: column;}
+    .col-50{flex: 0 0 100%; max-width: 100%;}
+}

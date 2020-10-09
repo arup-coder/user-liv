@@ -1,0 +1,21 @@
+<form [formGroup]="groupDetailForm">
+  <mat-card class="data-card mat-elevation-z">
+    <h4>
+      Basic Detail
+      <div class="right-element">
+        <a href="javascript:void(0)" [routerLink]="[{ outlets: { dialog: ['user-group-edit', groupDetail.groupId] } }]">
+          <span class="material-icons-outlined">edit</span>
+        </a>
+      </div>
+    </h4>
+    <mat-form-field appearance="legacy" class="w-100">
+      <mat-label>Group Name</mat-label>
+      <input matInput type="text" formControlName="groupName" required maxlength="25" />
+    </mat-form-field>
+    <mat-form-field appearance="legacy" class="w-100">
+      <mat-label>Group Description</mat-label>
+      <textarea matInput type="text" formControlName="groupDescription" required></textarea>
+    </mat-form-field>
+  </mat-card>
+</form>
+

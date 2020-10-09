@@ -1,0 +1,6 @@
+<div fxFlex="100" fxFlex.lt-md="100">
+    <lib-user-profile-details [userDetail]="userDetail$" (onUpdateUserData)="onUpdateUserData($event)"
+        (onSelectUserCountry)="onSelectCountry($event)" [countryList]="countryList"
+        [stateList]="stateList">
+    </lib-user-profile-details>
+</div>

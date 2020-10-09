@@ -1,0 +1,21 @@
+@import "../../../../../../../src/styles.scss";
+
+
+::ng-deep{
+    .list-header-title{@include flexbox; @include align-items($value: center); @include justify-content($value: space-between);}
+}
+.not-found{@include flexbox; @include align-items($value: center); @include flex-direction($value: column); padding: 1.25rem 1.25rem 3.75rem;
+    h4{font-size: 1.125rem; margin-bottom: 1.625rem;}
+    .mat-button-base{min-width: 9.375rem;}
+}
+
+/*----- For Group Managemtnt ------*/
+.groupManagement{margin: 0 -1.25rem;
+    .table-main-wrapper{box-shadow: none !important;}
+}
+
+
+@media only screen and (max-width: 767px){
+    .form-field-content{padding-bottom: 5rem;}
+    .form-submit-action{position: fixed; bottom: 0; left: 0; right: 0; padding: 10px; margin: 0; @include justify-content($value: space-between); background: #fff; z-index: 1; border-top: 1px rgba(0, 0, 0, 0.2) solid;}
+}

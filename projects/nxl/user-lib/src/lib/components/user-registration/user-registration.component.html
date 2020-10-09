@@ -1,0 +1,414 @@
+<div class="registerModule">
+  <form [formGroup]="registrationForm" class="registrationForm">
+    <div class="form-field-content">
+      <mat-card class="mat-elevation-z">
+        <div class="row">
+          <div class="col-50" *ngIf="isShowFirstName">
+            <mat-form-field color="primary">
+              <mat-label>{{ placeholderFirstName }}</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="firstName"
+                placeholder="{{ placeholderFirstName }}"
+                maxlength="50"
+                [required]="isRequiredFirstName"
+              />
+              <mat-error *ngIf="firstNameControlInvalid"
+                >{{ placeholderFirstName }} is Invalid.</mat-error
+              >
+              <mat-error *ngIf="firstNameControlRequired"
+                >{{ placeholderFirstName }} is required.</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="col-50" *ngIf="isShowLastName">
+            <mat-form-field color="primary">
+              <mat-label>{{ placeholderLastName }}</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="lastName"
+                placeholder="{{ placeholderLastName }}"
+                maxlength="50"
+                [required]="isRequiredLastName"
+              />
+              <mat-error *ngIf="lastNameControlInvalid"
+                >{{ placeholderLastName }} is Invalid.</mat-error
+              >
+              <mat-error *ngIf="lastNameControlRequired"
+                >{{ placeholderLastName }} is required.</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="col-50" *ngIf="isShowEmail">
+            <mat-form-field color="primary" style="cursor: not-allowed;">
+              <mat-label>{{ placeholderEmail }}</mat-label>
+              <input
+                matInput
+                type="email"
+                formControlName="email"
+                maxlength="100"
+                placeholder="{{ placeholderEmail }}"
+                readonly
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-50" *ngIf="isShowAlternateEmail">
+            <mat-form-field color="primary">
+              <mat-label>{{ placeholderAlternateEmail }}</mat-label>
+              <input
+                matInput
+                type="email"
+                formControlName="alternateEmail"
+                maxlength="100"
+                placeholder="{{ placeholderAlternateEmail }}"
+                [required]="isRequiredAlternateEmail"
+              />
+              <mat-error *ngIf="alternateEmailControlInvalid"
+                >{{ placeholderAlternateEmail }} is Invalid.</mat-error
+              >
+              <mat-error *ngIf="alternateEmailControlRequired"
+                >{{ placeholderAlternateEmail }} is required.</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="col-50" *ngIf="isShowExternalId">
+            <mat-form-field color="primary">
+              <mat-label>{{ placeholderExternalId }}</mat-label>
+              <input
+                matInput
+                formControlName="externalId"
+                placeholder="{{ placeholderExternalId }}"
+                [required]="isRequiredExternalId"
+                [readonly]="isReadOnly"
+                maxlength="50"
+              />
+              <mat-error *ngIf="externalIdControlRequired"
+                >{{ placeholderExternalId }} is required.</mat-error
+              >
+              <mat-error *ngIf="externalIdControlInvalid"
+                >{{ placeholderExternalId }} is Invalid.</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="col-50" *ngIf="isShowJobTitle">
+            <mat-form-field color="primary">
+              <mat-label>{{ placeholderJobTitle }}</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="jobTitle"
+                placeholder="{{ placeholderJobTitle }}"
+                maxlength="100"
+                [required]="isRequiredJobTitle"
+              />
+              <mat-error *ngIf="jobTitleControlInvalid"
+                >{{ placeholderJobTitle }} is Invalid.</mat-error
+              >
+              <mat-error *ngIf="jobTitleControlRequired"
+                >{{ placeholderJobTitle }} is Required.</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="col-50" *ngIf="isShowDepartment">
+            <mat-form-field color="primary">
+              <mat-label>{{ placeholderDepartment }}</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="department"
+                placeholder="{{ placeholderDepartment }}"
+                maxlength="100"
+                [required]="isRequiredDepartment"
+              />
+              <mat-error *ngIf="departmentControlInvalid"
+                >{{ placeholderDepartment }} is Invalid.</mat-error
+              >
+              <mat-error *ngIf="departmentControlRequired"
+                >{{ placeholderDepartment }} is Required.</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="col-50" *ngIf="isShowOrganization">
+            <mat-form-field color="primary">
+              <mat-label>{{ placeholderOrganization }}</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="organization"
+                placeholder="{{ placeholderOrganization }}"
+                maxlength="100"
+                [required]="isRequiredOrganization"
+              />
+              <mat-error *ngIf="companyControlInvalid"
+                >{{ placeholderOrganization }} is Invalid.</mat-error
+              >
+              <mat-error *ngIf="companyControlRequired"
+                >{{ placeholderOrganization }} is Required.</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="col-50" *ngIf="isShowWorkPhone">
+            <mat-form-field color="primary">
+              <mat-label>{{ placeholderWorkPhone }}</mat-label>
+              <input
+                matInput
+                formControlName="workPhone"
+                maxlength="20"
+                placeholder="{{ placeholderWorkPhone }}"
+                [value]="registrationForm.get('workPhone').value | phoneNumber"
+                [required]="isRequiredWorkPhone"
+              />
+              <mat-error *ngIf="workPhoneControlInvalid"
+                >{{ placeholderWorkPhone }} is Invalid.</mat-error
+              >
+              <mat-error *ngIf="workPhoneControlRequired"
+                >{{ placeholderWorkPhone }} is Required.</mat-error
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-50" *ngIf="isShowAddress1">
+            <mat-form-field color="primary">
+              <mat-label>{{ placeholderAddress1 }}</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="address1"
+                placeholder="{{ placeholderAddress1 }}"
+                maxlength="100"
+                [required]="isRequiredAddress1"
+              />
+              <mat-error *ngIf="address1ControlRequired"
+                >{{ placeholderAddress1 }} is Required.</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="col-50" *ngIf="isShowAddress2">
+            <mat-form-field color="primary">
+              <mat-label>{{ placeholderAddress2 }}</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="address2"
+                placeholder="{{ placeholderAddress2 }}"
+                maxlength="100"
+                [required]="isRequiredAddress2"
+              />
+              <mat-error *ngIf="address2ControlRequired"
+                >{{ placeholderAddress2 }} is Required.</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="col-50" *ngIf="isShowAddress3">
+            <mat-form-field color="primary">
+              <mat-label>{{ placeholderAddress3 }}</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="address3"
+                placeholder="{{ placeholderAddress3 }}"
+                maxlength="100"
+                [required]="isRequiredAddress3"
+              />
+              <mat-error *ngIf="address3ControlRequired"
+                >{{ placeholderAddress3 }} is Required.</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="col-50" *ngIf="isShowAddress4">
+            <mat-form-field color="primary">
+              <mat-label>{{ placeholderAddress4 }}</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="address4"
+                placeholder="{{ placeholderAddress4 }}"
+                maxlength="100"
+                [required]="isRequiredAddress4"
+              />
+              <mat-error *ngIf="address4ControlRequired"
+                >{{ placeholderAddress4 }} is Required.</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="col-50" *ngIf="isShowCity">
+            <mat-form-field color="primary">
+              <mat-label>{{ placeholderCity }}</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="city"
+                placeholder="{{ placeholderCity }}"
+                maxlength="50"
+                [required]="isRequiredCity"
+              />
+              <mat-error *ngIf="cityControlRequired">{{ placeholderCity }} is Required.</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-50" *ngIf="isShowStateCode">
+            <mat-form-field color="primary">
+              <mat-label>{{ placeholderStateCode }}</mat-label>
+              <mat-select formControlName="stateCode" [required]="isRequiredStateCode">
+                <mat-option *ngFor="let state of stateList" [value]="state.stateCode">
+                  {{ state.stateName }}
+                </mat-option>
+              </mat-select>
+              <i class="material-icons">keyboard_arrow_down</i>
+              <mat-error *ngIf="stateCodeControlRequired"
+                >{{ placeholderStateCode }} is Required.</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="col-50" *ngIf="isShowCountryCode">
+            <mat-form-field color="primary">
+              <mat-label>{{ placeholderCountryCode }}</mat-label>
+              <mat-select
+                formControlName="countryCode"
+                [required]="isRequiredCountryCode"
+                (selectionChange)="onSelectCountry()"
+              >
+                <mat-option *ngFor="let country of countryList" [value]="country.code">
+                  {{ country.name }}
+                </mat-option>
+              </mat-select>
+              <i class="material-icons">keyboard_arrow_down</i>
+              <mat-error *ngIf="countryCodeControlInvalid"
+                >{{ placeholderCountryCode }} is Invalid.</mat-error
+              >
+              <mat-error *ngIf="countryCodeControlRequired"
+                >{{ placeholderCountryCode }} is required.</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="col-50" *ngIf="isShowPostalCode">
+            <mat-form-field color="primary">
+              <mat-label>{{ placeholderPostalCode }}</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="postalCode"
+                placeholder="{{ placeholderPostalCode }}"
+                maxlength="20"
+                [required]="isRequiredPostalCode"
+              />
+              <mat-error *ngIf="postalCodeControlRequired"
+                >{{ placeholderPostalCode }} is required.</mat-error
+              >
+              <mat-error *ngIf="postalCodeControlInvalid"
+                >{{ placeholderPostalCode }} is Invalid.</mat-error
+              >
+            </mat-form-field>
+          </div>
+          <div class="col-50" *ngIf="isShowMobilePhone && !isRequiredMobilePhone">
+            <mat-form-field color="primary">
+              <mat-label>{{ placeholderMobilePhone }}</mat-label>
+              <input
+                matInput
+                formControlName="mobilePhone"
+                placeholder="Mobile Phone"
+                maxlength="20"
+                [value]="registrationForm.get('mobilePhone').value | phoneNumber"
+              />
+              <mat-error *ngIf="mobilePhoneControlInvalid"
+                >{{ placeholderMobilePhone }} is Invalid.</mat-error
+              >
+            </mat-form-field>
+          </div>
+        </div>
+        <div *ngIf="isShowMobilePhone && isRequiredMobilePhone">
+          <div class="row">
+            <div class="col-50 checkOpt">
+              <mat-checkbox color="primary" [checked]="true">Mobile opt In</mat-checkbox>
+            </div>
+            <div class="col-50"></div>
+          </div>
+          <div class="row">
+            <div class="col-50">
+              <mat-form-field color="primary">
+                <mat-label>{{ placeholderMobilePhone }}</mat-label>
+                <input
+                  matInput
+                  formControlName="mobilePhone"
+                  placeholder="Mobile Phone"
+                  maxlength="20"
+                  [value]="registrationForm.get('mobilePhone').value | phoneNumber"
+                  required
+                />
+                <mat-error *ngIf="mobilePhoneControlInvalid"
+                  >{{ placeholderMobilePhone }} is Invalid.</mat-error
+                >
+                <mat-error *ngIf="mobilePhoneControlRequired"
+                  >{{ placeholderMobilePhone }} is required.</mat-error
+                >
+              </mat-form-field>
+            </div>
+            <div class="col-50">
+              <button mat-flat-button color="accent" class="btn-sm">
+                Send Verification Code
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-50">
+              <mat-form-field color="primary">
+                <mat-label>Enter Verification Code</mat-label>
+                <input matInput type="text" placeholder="Enter Verification Code" maxlength="6" />
+              </mat-form-field>
+            </div>
+            <div class="col-50">
+              <button mat-flat-button color="accent" class="btn-sm">
+                Verify Code
+              </button>
+              <button mat-flat-button color="accent" class="btn-sm">
+                Send New Code
+              </button>
+            </div>
+          </div>
+          <div class="row" *ngIf="!isReadOnly">
+            <div class="col-50">
+              <mat-form-field color="primary">
+                <mat-label>Enter Company Code</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  formControlName="companyCode"
+                  placeholder="Enter Company Code"
+                  id="txtcompnyCode"
+                />
+
+                <mat-error *ngIf="companyCodeInvalid">Company Code is Invalid.</mat-error>
+                <mat-error *ngIf="companyCodeInvalidRequired">Company Code is Required.</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+      <div class="form-submit-action">
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="!registrationForm.valid"
+          class="btn-lg"
+          (click)="onContinueClick(registrationForm)"
+          *ngIf="!isReadOnly"
+          routerLink="/home"
+        >
+          Continue
+        </button>
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="!registrationForm.valid"
+          class="btn-lg"
+          (click)="onVerifyClick(registrationForm)"
+          *ngIf="isReadOnly"
+          routerLink="/home"
+        >
+          Verify
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,105 @@
+<div class="view-user" *ngIf="userDetail; let user">
+  <div class="view-user__head">
+    <!-- <span>User {{ user.userId }}</span> -->
+    <span>User Information</span>
+    <a href="javascript:void(0)" (click)="onCancelClick()" class="close-btn"><i class="material-icons">close</i></a>
+  </div>
+  <div class="view-user__body">
+    <mat-card class="mat-elevation-z">
+      <mat-card-header class="view-user__avatar-head" *ngIf="userDetail; let user">
+        <div mat-card-avatar class="example-header-image">{{user.firstName | slice:0:1}}{{user.lastName | slice:0:1}}</div>
+        <mat-card-title>{{ user.firstName }} {{ user.lastName }}</mat-card-title>
+        <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+        <mat-card-subtitle>
+          <span
+            class="status_elm active_state"
+            [ngClass]="{
+              active_state: user.isActive === true,
+              inactive_state: user.isActive === false
+            }"
+          >
+            {{ user.isActive | status }}</span
+          ></mat-card-subtitle
+        >
+      </mat-card-header>
+    </mat-card>
+    <div>
+      <mat-list>
+        <h5 mat-subheader>
+          Basic Details  <!--<a href="javascript:void(0)"><i class="material-icons">edit</i></a> -->
+        </h5>
+        <mat-list-item>
+          <label mat-line>Employee Id</label>
+          <p mat-line>{{ user.externalId }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <label mat-line>Job Title</label>
+          <p mat-line>{{ user.jobTitle }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <label mat-line>Department ID</label>
+          <p mat-line>{{ user.department }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <label mat-line>Company</label>
+          <p mat-line>{{ user.organization }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <label mat-line>Country</label>
+          <p mat-line>{{ user.countryCode }}</p>
+        </mat-list-item>
+      </mat-list>
+      <mat-list>
+        <h5 mat-subheader>
+           Login Details <!--<a href="javascript:void(0)"><i class="material-icons">edit</i></a> -->
+        </h5>
+        <!-- <mat-list-item>
+          <label mat-line>UserName</label>
+          <p mat-line>{{ user.userName }}</p>
+        </mat-list-item> -->
+        <mat-list-item>
+          <label mat-line>Password</label>
+          <p mat-line><a href="javascript:void(0)">Change Password</a></p>
+        </mat-list-item>
+      </mat-list>
+      <mat-list>
+        <h5 mat-subheader>
+           Address <!--<a href="javascript:void(0)"><i class="material-icons">edit</i></a> -->
+        </h5>
+        <mat-list-item>
+          <label mat-line>Address</label>
+          <p mat-line>
+            <span>{{ user.address1 }}</span>
+            <span>{{ user.address2 }}</span>
+          </p>
+        </mat-list-item>
+        <mat-list-item>
+          <label mat-line>City</label>
+          <p mat-line>{{ user.city }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <label mat-line>State</label>
+          <p mat-line>{{ user.stateCode }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <label mat-line>ZipCode</label>
+          <p mat-line>{{ user.postalCode }}</p>
+        </mat-list-item>
+      </mat-list>
+      <mat-list>
+        <h5 mat-subheader>
+          Phone <!--<a href="javascript:void(0)"><i class="material-icons">edit</i></a> -->
+        </h5>
+        <mat-list-item>
+          <label mat-line>Work Phone</label>
+          <p mat-line>{{ user.workPhone }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <label mat-line>Mobile Phone</label>
+          <p mat-line>{{ user.mobilePhone }}</p>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div *ngIf="!userDetail">No User Detail Found</div>
+  </div>
+</div>
