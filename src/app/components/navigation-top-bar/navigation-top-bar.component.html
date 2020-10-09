@@ -1,0 +1,120 @@
+<div class="navigation-bar" fxLayout="column">
+  <!-- Top Navigation -->
+  <div class="topNav" fxLayout="row" fxLayoutAlign="space-between center">
+    <a href="javascript:void(0)" class="sidenav-wrapper__handler" (click)="clickSideNav($event)"
+      ><i class="material-icons-outlined">dehaze</i></a
+    >
+    <div class="topNav__items" topMenuOutside (clickedOutside)="outSideClick()">
+      <!-- Tenant Switcher -->
+      <div>
+        <lib-tenant-switcher (click)="onTenantClick()"></lib-tenant-switcher>
+        <router-outlet name="tenant"></router-outlet>
+      </div>
+      <!-- users settings & component -->
+      <ul>
+        <li>
+          <a href="javascript:void(0)" (click)="clickSearchBar()">
+            <i class="material-icons-outlined">search</i>
+          </a>
+        </li>
+        <li>
+          <a
+            href="javascript:void(0)"
+            class="seeting"
+            [ngClass]="profileConfiguration ? 'active' : ''"
+            (click)="clickConfiguration()"
+          >
+            <i class="material-icons-outlined">settings</i>
+          </a>
+          <div class="configuration dropbox" [ngClass]="profileConfiguration ? 'active' : ''">
+            <ul class="config-dropdown">
+              <li>
+                <a class="menu-link" [routerLink]="['/user/user-list']">User Management</a>
+              </li>
+              <li>
+                <a class="menu-link" [routerLink]="['/user/user-group-management']">Group Management</a>
+              </li>
+              <li>
+                <a href="javascript:void(0)" class="active" (click)="clickChildNav()">
+                  Point Management
+                  <i class="material-icons-outlined" *ngIf="!childNav">expand_more</i>
+                  <i class="material-icons-outlined" *ngIf="childNav">expand_less</i>
+                </a>
+                <ul class="child-nav" [ngClass]="childNav ? '' : 'expand'">
+                  <li>
+                    <a [routerLink]="['/points/redemption-points/list']" class="menu-link active"
+                      >Redemption Point</a
+                    >
+                  </li>
+                  <li>
+                    <a [routerLink]="['/points/pool-points/list']" class="menu-link">Pool Point</a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/points/client-points/list']" class="menu-link"
+                      >Client Point</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  [routerLink]="['/configuration/platform-settings']"
+                  (click)="clickConfiguration()"
+                  class="menu-link"
+                  >Platform Settings</a
+                >
+              </li>
+              <li>
+                <a
+                  href="javascript:void(0)"
+                  [routerLink]="['/configuration/registration-settings']"
+                  (click)="clickConfiguration()"
+                  class="menu-link"
+                  >Configuration</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+        <!-- <li><a href="javascript:void(0)"><i class="material-icons-outlined">email</i> <span class="active-alert"></span></a></li>
+            <li><a href="javascript:void(0)"><i class="material-icons-outlined">notifications</i><span class="active-alert"></span></a></li> -->
+        <li>
+          <a href="javascript:void(0)" class="user-pic " (click)="clickProfile()">
+            {{ userDetail ? (userDetail[0].firstName | slice: 0:1 | uppercase) : '' }}
+          </a>
+          <div class="profile-component dropbox" [ngClass]="profileDropbox ? 'active' : ''">
+            <mat-card-header class="avatar-head">
+              <div mat-card-avatar class="example-header-image">
+                {{ userDetail ? (userDetail[0].firstName | slice: 0:1) : ' '
+                }}{{ userDetail ? (userDetail[0].lastName | slice: 0:1) : '' }}
+              </div>
+              <mat-card-title>
+                {{ userDetail ? userDetail[0].firstName + ' ' + userDetail[0].lastName : '' }}
+              </mat-card-title>
+              <mat-card-subtitle>{{ userDetail ? userDetail[0].email : '' }}</mat-card-subtitle>
+            </mat-card-header>
+            <a mat-menu-item [routerLink]="['/user/profile/user-profile']" class="active"
+              ><i class="material-icons">perm_identity</i>Profile</a
+            >
+            <a mat-menu-item><i class="material-icons-outlined">settings</i>Settings</a>
+            <a mat-menu-item><i class="material-icons">power_settings_new</i>Log Out</a>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Search Bar -->
+      <!-- <form> -->
+      <div class="topNav__search-wrap" [ngClass]="searchBar ? 'expand' : ''">
+        <div class="topNav__search">
+          <i class="material-icons-outlined search-icon">search</i>
+          <input type="text" placeholder="Search for" class="topNav__input-control" />
+          <a href="javascript:void(0)" class="close" (click)="clickSearchBar()"
+            ><i class="material-icons-outlined">close</i></a
+          >
+        </div>
+      </div>
+      <!-- </form> -->
+    </div>
+  </div>
+</div>

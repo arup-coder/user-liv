@@ -1,0 +1,46 @@
+<!-- Side Nav -->
+<div class="sidenav-wrapper {{ScreenWidthClass}}">
+    <div class="sidenav-wrapper__head">   
+         <a class="sm-logo"><img *ngIf="platformSettings" src="{{platformSettings.logoBanner ? (platformSettings.logoBanner.logoIcon) : ''}}"></a>
+         <a class="lg-logo"><img  *ngIf="platformSettings" src="{{platformSettings.logoBanner ? (platformSettings.logoBanner.logo) : ''}}"></a>
+    </div>
+    <div class="sidenav-wrapper__body">
+        <!-- Menu in Expand mode -->
+        <!-- <ul *ngIf="sideNav == true"> -->
+        <ul>
+            <li>
+                <a href="javascript:void(0)" routerLink="/home" class="active"><i class="material-icons-outlined">dashboard</i> <span>Dashboard</span></a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" >
+                    <i class="material-icons-outlined">card_giftcard</i>
+                    Recognition
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" ><i class="material-icons-outlined" >record_voice_over</i> Campaign</a>
+            </li>
+            <li>
+                <a href="javascript:void(0)"><i class="material-icons-outlined">shopping_basket</i> Shopping Cart</a>
+            </li>
+        </ul>
+
+    <!-- Menu in collapsed mode -->
+    <!-- <ul *ngIf="sideNav == false">
+            <li>
+                <a href="javascript:void(0)"><i class="material-icons-outlined">dashboard</i></a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="active"><i class="material-icons-outlined">account_box</i></a>
+                <ul class="child-nav">
+                    <li><a class="active">User Management</a></li>
+                    <li><a href="javascript:void(0)" class="active">User Management</a></li>
+                    <li><a href="javascript:void(0)">Role Management</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:void(0)"><i class="material-icons-outlined">emoji_events</i></a>
+            </li>
+        </ul> -->
+  </div>
+</div>

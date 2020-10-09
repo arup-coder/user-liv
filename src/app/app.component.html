@@ -1,0 +1,55 @@
+<!-- Landing Page - Not Authenticated -->
+<div *ngIf="!(isAuthenticatedUser$ | async)">
+  <router-outlet></router-outlet>
+</div>
+
+<!-- Once Authenticated && !Registered -->
+<ng-container *ngIf="(isAuthenticatedUser$ | async) && !(isRegisteredUser$ | async)">
+  <router-outlet></router-outlet>
+</ng-container>
+
+<!-- Body layout -->
+<div
+  class="main-layout {{ ScreenWidthClass }}"
+  *ngIf="(isAuthenticatedUser$ | async) && (isRegisteredUser$ | async)"
+  fxLayout="row"
+  (window:resize)="onResize($event)"
+>
+  <!-- Tenant with body content -->
+  <mat-drawer-container [hasBackdrop]="true" class="tenant-wrap">
+    <mat-drawer-content>
+      <!-- Side Nav -->
+      <lib-navigation-side-nav
+        *ngIf="(isAuthenticatedUser$ | async) && (isRegisteredUser$ | async)"
+        [ScreenWidthClass]="ScreenWidthClass"
+      >
+      </lib-navigation-side-nav>
+
+      <!-- Body Layout -->
+      <div class="right-body-layout">
+        <!-- Top Navigation -->
+        <lib-navigation-top-bar
+          appOutside
+          (clickedOutside)="outSideClick()"
+          (onClickTenant)="drawer.toggle()"
+          *ngIf="(isAuthenticatedUser$ | async) && (isRegisteredUser$ | async)"
+          (onClickSideNav)="onClickSideNav($event)"
+        >
+        </lib-navigation-top-bar>
+
+        <!-- Once Authenticated && Registered -->
+        <ng-container *ngIf="(isAuthenticatedUser$ | async) && (isRegisteredUser$ | async)">
+          <router-outlet></router-outlet>
+        </ng-container>
+      </div>
+    </mat-drawer-content>
+    <mat-drawer #drawer mode="over" position="end">
+      <lib-tenant-list-side-nav-page
+        (onCancelClick)="drawer.toggle()"
+        [tenantIdsList]="userTenantIds"
+        (onManageTenantClick)="onManageTenantClick()"
+        (onTenantSelect)="onTenantSelect()"
+      ></lib-tenant-list-side-nav-page>
+    </mat-drawer>
+  </mat-drawer-container>
+</div>

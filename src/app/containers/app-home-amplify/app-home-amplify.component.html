@@ -1,0 +1,202 @@
+<!-- Second top bar -->
+<div class="navigation-bar" fxLayout="column">
+    <div class="topSecondBar" fxLayout="row">
+        <h2 *ngIf="userDetail && userDetail.length > 0 ">{{userDetail[0].firstName}} {{userDetail[0].lastName}}</h2>
+    </div>
+</div>
+
+<div class="body-content dashboard">
+    <mat-card class="mat-elevation-z p-15">
+        <div fxLayout.lt-sm="column" fxLayout="row" class="counter mb-20" fxLayoutGap="20px" fxLayoutGap.lt-sm="5px">
+            <div fxFlex="20">
+                <div class="box set-1">
+                    <div class="data">
+                        <h3>4</h3>
+                        <h5>Campaigns Active</h5>
+                    </div>
+                </div>
+            </div>
+            <div fxFlex="20">
+                <div class="box set-2">
+                    <div class="data">
+                        <h3>12</h3>
+                        <h5>Quiz Available</h5>
+                    </div>
+                </div>
+            </div>
+            <div fxFlex="20">
+                <div class="box set-3">
+                    <div class="data">
+                        <h3>5,000</h3>
+                        <h5>Points Available</h5>
+                    </div>
+                </div>
+            </div>
+            <div fxFlex="40">
+                <div class="box highlight">
+                    <div class="data">
+                        <h3>5,000</h3>
+                        <h5>Points you can redeem</h5>
+                    </div>
+                    <div class="data">
+                        <a href="">
+                            <i class="material-icons-outlined">shopping_basket</i>
+                            <p>Shop Now</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard__banner">
+            <img *ngIf="platformSettings"
+                src="{{ platformSettings.logoBanner ? platformSettings.logoBanner.greatPerformersBanner : ''}}" alt="">
+            <h2 class="title">Amplify Sales</h2>
+        </div>
+        <div class="dashboard__content">
+            <h2>Welcome to a new way to applaud Great Performers!</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non libero nec eros ultricies cursus
+                sollicitudin ac quam. In luctus justo ex, nec aliquam leo tincidunt ac. Mauris a eros auctor, maximus
+                nibh quis, placerat lacus. Nullam cursus erat varius turpis aliquam maximus. Duis egestas porta pretium.
+                In vitae condimentum libero, sed sagittis dui. Aliquam quis odio tincidunt, tempor est quis, lacinia mi.
+                Vestibulum nulla purus, condimentum eget euismod suscipit, pulvinar et dui. Sed non massa bibendum,
+                porta erat quis, venenatis mi. Vivamus convallis augue massa, ut dapibus neque aliquet vitae.
+            </p>
+        </div>
+    </mat-card>
+
+    <div fxLayout.lt-sm="column" fxLayout="row" class="statistic" fxLayoutGap="20px" fxLayoutGap.lt-sm="5px">
+        <div fxFlex="50">
+            <mat-card class="mat-elevation-z">
+                <div class="mat-action-head">
+                    <h2>Campaign Stats</h2>
+                    <div class="view-swicher">
+                        <a href="javascript:void(0)" (click)="onClickStatusChart()" class="active"><i class="material-icons-outlined">bar_chart</i></a>
+                        <a href="javascript:void(0)" (click)="onClickStatusViewList()"><i
+                                class="material-icons-outlined">view_list</i></a>
+                    </div>
+                </div>
+                <div class="stat-body">
+                    <!-- List view -->
+                    <div class="stat-body__table-wrap"  [ngClass]="{active : showStatus===true,  'inactive' :  showStatus===false  }">
+                        <mat-table [dataSource]="dataSource">
+
+                            <ng-container matColumnDef="CampaignTitle">
+                                <mat-header-cell *matHeaderCellDef> Campaign Title </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.CampaignTitle}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="TotalGoal">
+                                <mat-header-cell *matHeaderCellDef> Total Goal </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.TotalGoal}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="GoalCompleted">
+                                <mat-header-cell *matHeaderCellDef> Goal Completed </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.GoalCompleted}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="DaysRemaining">
+                                <mat-header-cell *matHeaderCellDef> Days Remaning </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.DaysRemaining}} </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        </mat-table>
+                    </div>
+
+                    <!-- Chart view -->
+                    <div class="stat-body__chart" [ngClass]="{active : showStatus===false ,  'inactive' :  showStatus===true  }">
+                        <img src="assets/images/Group 455.png" alt="">
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+        <div fxFlex="50">
+            <mat-card class="mat-elevation-z">
+                <div class="mat-action-head">
+                    <h2>Quiz Stats</h2>
+                    <div class="view-swicher">
+                        <a href="javascript:void(0)" (click)="onClickQuizChart()" class="active"><i class="material-icons-outlined">bar_chart</i></a>
+                        <a href="javascript:void(0)" (click)="onClickQuizViewList()"><i
+                                class="material-icons-outlined">view_list</i></a>
+                    </div>
+                </div>
+                <div class="stat-body">
+                    <!-- List view -->
+                    <div class="stat-body__table-wrap" [ngClass]="{active : showQuiz===true  ,'inactive' : showQuiz===false }">
+                        <mat-table [dataSource]="quizData">
+
+                            <ng-container matColumnDef="QuizTitle">
+                                <mat-header-cell *matHeaderCellDef> Quiz Title </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.QuizTitle}} </mat-cell>
+                            </ng-container>
+
+
+                            <ng-container matColumnDef="Questions">
+                                <mat-header-cell *matHeaderCellDef> Questions </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.Questions}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Status">
+                                <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.Status}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Points">
+                                <mat-header-cell *matHeaderCellDef> Points </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.Points}} </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="quizColumn"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: quizColumn;"></mat-row>
+                        </mat-table>
+                    </div>
+
+                    <!-- Chart view -->
+                    <div class="stat-body__chart" [ngClass]="{active : showQuiz===false ,'inactive' : showQuiz===true }">
+                        <img src="assets/images/Group 456.png" alt="">
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+
+    <mat-card class="mat-elevation-z redeem-list">
+        <div class="head" fxLayout.lt-sm="column" fxLayout="row" fxLayoutAlign="space-between center">
+            <h2>You can redeem points for</h2>
+            <div class="action-btn">
+                <button mat-flat-button class="btn-lg" color="accent">View My Catalogue</button>
+                <button mat-flat-button class="btn-lg" color="primary">Reward Specials</button>
+            </div>
+        </div>
+        <div fxLayout.lt-sm="column" fxLayout="row" fxLayoutGap="20px" fxLayoutGap.lt-sm="5px">
+            <div fxFlex="25">
+                <div class="box">
+                    <img src="../../assets/images/Image 33.png" alt="">
+                    <h3 class="title">Travel</h3>
+                </div>
+            </div>
+            <div fxFlex="25">
+                <div class="box">
+                    <img src="../../assets/images/Image 34.png" alt="">
+                    <h3 class="title">Gift Card</h3>
+                </div>
+            </div>
+            <div fxFlex="25">
+                <div class="box">
+                    <img src="../../assets/images/Image 35.png" alt="">
+                    <h3 class="title">Merchandise</h3>
+                </div>
+            </div>
+            <div fxFlex="25">
+                <div class="box">
+                    <img src="../../assets/images/Image 36.png" alt="">
+                    <h3 class="title">Event Tickets</h3>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+</div>

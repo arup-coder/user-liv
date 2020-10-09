@@ -1,0 +1,99 @@
+@import "../../../styles.scss";
+
+.navigation-bar{ position: sticky; top: 0; z-index: 2; @include nav-frame();
+    
+    /*----- Menu handler -------*/
+    .sidenav-wrapper__handler{line-height: 0.688rem; color: #fff; margin-right: auto;
+        &:hover{opacity: 0.8;}
+    }
+
+    /*---- Nav Top bar -----*/
+    .topNav{  border-bottom: 1px #d8d8d8 solid; min-height: 3.75rem; padding: 0 1.25rem;
+        &__items{ @include flexbox; @include align-items($value: center);
+            ul{ @include flexbox; @include align-items($value: center);
+                li{ padding: 0 0.625rem; position: relative;
+                    a{color: #fff; position: relative; padding: 6px; font-size: 1.5rem; line-height: 1rem; border-radius: 50%; @include flexbox; @include align-items($value: center); @include justify-content($value: center);
+                        &:hover, &.active{background: rgba(255,255,255,0.25);}
+                        .active-alert{position: absolute; top: 0.188rem; right: 0.188rem; width: 0.625rem; height: 0.625rem; border-radius: 50%; background: #EB0045;}
+                    }
+                    a.user-pic{background: #FFFFFF40; box-shadow: $box-shadow-d3; font-size: 0.75rem; width: 2.188rem; height: 2.188rem; padding: 0;}
+                    &:last-child{padding-right: 0;}
+                }
+            }
+        }
+
+        .dropbox{ background: #fff; position: absolute; z-index: 101; top: calc(100% + 0.75rem); right: 0; box-shadow: 0 0.313rem 1.25rem rgba(0, 0, 0, 0.2); min-width: 15.625rem; opacity: 0; visibility: hidden; transition: all 0.3s linear;}
+
+        /*---- Profile Menu -----*/
+        .profile-component{
+            &.active{opacity: 1; visibility: visible;}
+            .avatar-head{@include flexbox; @include align-items($value: center); padding: 1.25rem; margin-bottom: 0.625rem; border-bottom: 0.063rem #E5E5E5 solid;
+                .mat-card-avatar{width: 3.75rem; height: 3.75rem; flex: 0 0 3.75rem; margin-right: 0.938rem; border-radius: 50%; background: $primary-color; color: #fff; @include flexbox; @include align-items($value: center); @include justify-content($value: center); text-transform: uppercase; font-size: 1.3rem;}
+                ::ng-deep .mat-card-header-text{@include flexbox; @include flex-direction($value: column); width: 100%; margin: 0;}
+                .mat-card-title{font-size: 0.938rem; color: $primary-text-color; font-weight: 600; margin-bottom: 0.4rem; white-space: nowrap;}
+                .mat-card-subtitle{margin-bottom: 0.625rem; color: $secondary-text-color; font-size: 0.813rem;}
+                .mat-card-subtitle:not(:first-child){margin-top: 0;}
+                .mat-card-subtitle:last-child{margin-bottom: 0;}
+            }
+            .mat-menu-item, a.mat-menu-item{line-height: 2.5rem; height: auto; color: $link-color; cursor: pointer; @include flexbox; @include align-items($value: center); padding: 0 1.25rem; width: 100%; border: 0;
+                i{margin-right: 0.813rem; font-size: 1rem;}
+                &:last-child{margin-bottom: 0.625rem;}
+                &:hover, &.active{background: #F3F3F9; color: $primary-color;}
+            }
+            a.mat-menu-item{border-radius: 0; font-size: 0.875rem; width: auto; justify-content: flex-start; color: $secondary-text-color;}
+        }
+
+        /*---- Configuration Menu -----*/
+        .configuration{ padding: 0.313rem 0; right: 0.625rem;
+            &.active{opacity: 1; visibility: visible;}
+            h4{font-size: 0.875rem; margin-top: 0;}
+            .mat-form-field{width: 100%;}
+            .config-dropdown{ @include flexbox; @include flex-direction($value: column); @include align-items($value: inherit);
+                li{ flex: 1; padding: 0;
+                    a{ color: $secondary-text-color; width: auto; padding: 0.625rem 0.9375rem; border-radius: 0; font-size: $font-size-base; height: auto; line-height: normal;@include flexbox; @include align-items($value: center); @include justify-content($value: flex-start);
+                        &:hover{background: #F3F3F9; color: $primary-color;}
+                        &.active{background: #EAEAF2; color: $primary-color; font-weight: 600;}
+                        &.active:after{width: 0.125rem; position: absolute; top: 0; bottom: 0; left: 0; background: $primary-color; content: '';}
+                        i{margin-left: auto; pointer-events: none;}
+                    }
+                    .child-nav{flex-direction: column; align-items: inherit; margin: 0; max-height: 500px; overflow: hidden; background: #fff; -webkit-transition: all .8s ease-in; transition: all .8s ease-in;
+                        li{
+                            a{padding-left: 2.188rem;
+                                &:hover{background: none;}
+                                &.active{background: none; font-weight: normal; color: $primary-color;}
+                                &.active:after{display: none;}
+                            }
+                        }
+                        &.expand{max-height: 0; -webkit-transition: all .8s ease-in; transition: all .8s ease-in;}
+                    }
+                }
+            }
+        }
+
+        /*---- Top Search bar -----*/
+        &__search-wrap{position: absolute; top: 0; bottom: 0; left: 0; right: 0; opacity: 0; max-height: 3.7rem; @include flexbox; @include align-items($value: center); visibility: hidden; -webkit-transition: all .28s ease-in; transition: all .28s ease-in; padding: 0 0 0 1.25rem; background: $primary-color;}
+        &__search-wrap.expand{opacity: 1; visibility: visible; -webkit-transition: all .28s ease-in; transition: all .28s ease-in;}
+        &__search{ padding: 0rem 0 0rem 0; @include flexbox; @include align-items($value: center); position: relative; width: 100%;
+            .search-icon{position: absolute; color: #fff; left: 0.75rem; top: 50%; transform: translateY(-50%);}
+        }
+        &__input-control{width: 100%; background: rgba(255,255,255,0.20); color: #fff; border: 0; line-height: 2.4rem; border-radius: 0.313rem; padding-left: 2.938rem; padding-right: 1.25rem;}
+        &__input-control::placeholder{font-size: 0.875rem; color: #fff;}
+        &__input-control + .close{margin: 0 1.25rem 0 1.625rem; color: #fff; line-height: 0.688rem;}
+    }
+}
+
+@media only screen and (max-width: 1200px){
+    .navigation-bar{
+        .topNav{
+            .profile-component{
+                .avatar-head{ padding: 1rem;
+                    .mat-card-avatar{width: 2.7rem; height: 2.7rem; flex: 0 0 2.7rem; margin-right: 0.875rem; font-size: 0.9375rem;}
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 767px){
+    .navigation-bar{position: fixed; top: 0; left: 0; right: 0;}
+}

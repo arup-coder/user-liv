@@ -1,0 +1,259 @@
+@import '../../../styles.scss';
+
+.navigation-bar {
+  @include nav-frame();
+
+  /*---- Second top bar -----*/
+  .topSecondBar {
+    @include top-second-bar();
+  }
+}
+
+.dashboard {
+  h2 {
+    font-size: 1.25rem;
+  }
+  &__banner {
+    height: 350px;
+    @include flexbox;
+    @include align-items($value: center);
+    @include justify-content($value: center);
+    overflow: hidden;
+    border-radius: 0.3rem;
+    position: relative;
+    &:after {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      content: '';
+      opacity: 0.5;
+      background: transparent linear-gradient(180deg, #00000000 0%, #979797 100%) 0% 0% no-repeat
+        padding-box;
+    }
+    img {
+      width: 100%;
+      min-height: 100%;
+    }
+    .title {
+      font-size: 3rem;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      margin: 0;
+      color: #fff;
+      font-family: $font-monsterat;
+      z-index: 1;
+    }
+  }
+  &__content {
+    padding: 1.875rem 6.25rem;
+    text-align: center;
+    h2 {
+      color: $primary-text-color;
+      font-family: $font-monsterat;
+      margin: 0.313rem 0 1.875rem;
+    }
+    p {
+      font-size: 0.9375rem;
+      color: $secondary-text-color;
+      margin: 0;
+    }
+  }
+  mat-card.mat-card.p-15 {
+    padding: 0.9375rem;
+  }
+}
+
+.counter {
+  .box {
+    text-align: center;
+    height: calc(100% - 2.5rem);
+    border-radius: 0.3rem;
+    padding: 1.25rem;
+    background-color: #f5f4f9;
+    @include flexbox;
+    @include align-items($value: center);
+    @include justify-content($value: space-between);
+    @include flex-direction($value: column);
+    img {
+      margin-top: auto;
+    }
+    h3 {
+      font-size: 2.25rem;
+      font-family: $font-monsterat;
+      margin-bottom: 0.625rem;
+      margin-top: 3.313rem;
+    }
+    h5 {
+      font-size: $font-size-base;
+      margin: 0;
+    }
+    &.set-1 {
+      h3 {
+        color: #11b938;
+      }
+    }
+    &.set-2 {
+      h3 {
+        color: #eb0045;
+      }
+    }
+    &.set-3 {
+      h3 {
+        color: #0caabc;
+      }
+    }
+    &.large {
+      @include justify-content($value: center);
+      background: #4d9783 url('../../../assets/images/Group 387.png');
+      h3 {
+        color: #fff;
+        font-size: 2.5rem;
+        margin-top: 0;
+      }
+      h5 {
+        color: #fff;
+        margin: 15px 0 20px;
+      }
+    }
+  }
+}
+.reward-list {
+  ul {
+    li {
+      @include flexbox;
+      @include justify-content($value: space-between);
+      padding: 1.125rem 0;
+      border-bottom: 1px #e5e5e5 solid;
+      h3,
+      h4 {
+        margin: 0;
+      }
+      h3 {
+        font-size: 1rem;
+        margin-bottom: 6px;
+        color: $primary-text-color;
+      }
+      h4 {
+        color: #00a537;
+        font-weight: 600;
+        margin-bottom: 6px;
+        font-size: $font-size-base;
+      }
+      p {
+        margin: 0;
+        font-size: $font-size-base;
+        color: $secondary-text-color;
+      }
+      span {
+        font-size: 13px;
+        color: #999999;
+        display: block;
+      }
+      .title {
+        max-width: 60%;
+        flex: 0 0 60%;
+        padding-right: 20px;
+      }
+      .detail {
+        flex: 1;
+        padding-right: 20px;
+        p {
+          line-height: 24px;
+          margin-top: 2px;
+          color: $primary-text-color;
+        }
+      }
+      .time {
+        text-align: right;
+      }
+    }
+  }
+}
+.redeem-list {
+  h2 {
+    color: $primary-text-color;
+  }
+  .head {
+    margin-bottom: 1.875rem;
+  }
+  .box {
+    position: relative;
+    &:after {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0.22rem;
+      content: '';
+      border-radius: 0.3rem;
+      background: transparent linear-gradient(180deg, #d8d8d800 0%, #6c6c6c 100%) 0% 0% no-repeat
+        padding-box;
+    }
+    img {
+      width: 100%;
+    }
+    .title {
+      font-size: 0.9375rem;
+      position: absolute;
+      left: 1.25rem;
+      bottom: 0.9375rem;
+      margin: 0;
+      color: #fff;
+      z-index: 1;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .counter {
+    .box {
+      min-height: 11.875rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .navigation-bar {
+    .topSecondBar {
+      padding: 0.68rem 1.25rem 2.125rem;
+      min-height: 4.938rem;
+
+      h2 {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  .dashboard {
+    &__banner {
+      height: auto;
+      max-height: 130px;
+      .title {
+        font-size: 1.5rem;
+        white-space: nowrap;
+      }
+    }
+    &__content {
+      padding: 1rem 0;
+    }
+  }
+
+  .reward-list__wrap {
+    overflow: auto;
+    ul li {
+      & > div {
+        min-width: 0px;
+      }
+    }
+  }
+
+  .counter {
+    .box {
+      margin-bottom: 10px;
+    }
+  }
+}

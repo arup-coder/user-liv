@@ -1,0 +1,56 @@
+@import "../../../styles.scss";
+
+.sidenav-wrapper{width: 18.75rem; box-shadow: 0 0.188rem 1.875rem #0000001A; z-index: 3; background: #fff; height: 100%; min-height: 100vh; position: fixed; left: 0; top: 0; bottom: 0; @include transition(all, 0.2s, linear);
+    &__head{min-height: 3.75rem; position: relative; display: flex; align-items: center; justify-content: center; border-bottom: 0.063rem #EEEEEE solid;
+        .lg-logo,.sm-logo{@include transition(all, 0.4s, linear); opacity: 0; visibility: hidden;width: 0;}
+    }
+    &__handler{position: absolute; right: -2.563rem; top: 50%; transform: translateY(-50%); line-height: 0.688rem; color: #fff; z-index: 1;
+        &:hover{color: rgba(255,255,255,0.8);}
+    }
+    &__body{ min-width: 4.375rem;
+        ul{margin: 0.625rem 0;
+            li{ position: relative;
+                a{display: flex; align-items: center; overflow: hidden; color: $secondary-text-color; padding: 0.813rem 1.438rem; position: relative; white-space: nowrap; font-size: 0.875rem;
+                    &:hover{background: #EAEAF2; color: $primary-color;}
+                    &.active{background: #EAEAF2; color: $primary-color;}
+                    &.active:after{width: 0.125rem; position: absolute; top: 0; bottom: 0; left: 0; background: $primary-color; content: '';}
+                    i{margin-right: 1.41rem;}
+                    span + i{margin: 0 0 0 auto;}
+                }
+            }
+        }
+    }
+    &.expand{width: 18.75rem; @include transition(all, 0.2s, linear);
+        .sidenav-wrapper{
+            &__head{
+                .lg-logo{opacity: 1; visibility: visible; width: auto; @include transition(all, 0.4s, ease-in);}
+            }
+        }
+        .sidenav-wrapper__body{
+            .child-nav.expand{max-height: 500px; @include transition(all, 0.8s, ease-in);}
+        }
+    }
+    &.collapsed { width: 4.375rem;
+        .sidenav-wrapper{ 
+            &__head{
+                .sm-logo{opacity: 1; visibility: visible; width: auto; @include transition(all, 0.4s, ease-in);}
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 1200px){
+    // .sidenav-wrapper{position: relative;}
+}
+@media only screen and (max-width: 767px){
+    .sidenav-wrapper{left: -5.375rem;}
+    .sidenav-wrapper.expand{left: 0; width: 4.375rem;
+        .sidenav-wrapper{
+            &__head{
+                .lg-logo{opacity: 0; visibility: hidden; width: 0; @include transition(all, 0.4s, ease-in);}
+                .sm-logo{opacity: 1; visibility: visible; width: auto; @include transition(all, 0.4s, ease-in);}
+            }
+        }
+    }
+}
+

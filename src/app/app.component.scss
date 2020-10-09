@@ -1,0 +1,40 @@
+@import "../styles.scss";
+
+.navigation-bar {
+  @include nav-frame();
+
+  /*---- Second top bar -----*/
+  .topSecondBar {
+    @include top-second-bar();
+  }
+}
+
+.dashboard{
+    &__banner{height: 350px; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 0.3rem; position: relative;
+        &:after{position: absolute; left: 0; right: 0; top: 0; bottom: 0; content: ''; opacity: 0.5; background: transparent linear-gradient(180deg, #00000000 0%, #979797 100%) 0% 0% no-repeat padding-box;}
+        img{width: 100%; min-height: 100%;}
+        .title{font-size: 48px; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); margin: 0; color: #fff; font-family: $font-monsterat; z-index: 1;}
+    }
+    &__content{ padding: 1.875rem 6.25rem; text-align: center;
+        h2{color: $primary-text-color; font-family: $font-monsterat; margin: 0.313rem 0 1.875rem;}
+        p{font-size: 0.9375rem; color: $secondary-text-color; margin: 0;}
+    }
+    mat-card.mat-card.p-15{
+        padding: 0.9375rem;
+    }
+}
+
+// Tenant style
+.tenant-wrap{ min-width: 100%;
+  .mat-drawer{ min-width: 25rem;
+    &:not(.mat-drawer-side){position: fixed; height: 100vh;}
+  }
+}
+
+@media only screen and (min-width: 768px){
+    .main-layout{
+        &.collapsed {
+            .right-body-layout{padding-left: 4.375rem;}
+        }
+    }
+}
