@@ -1,0 +1,69 @@
+@import 'theme';
+
+/* ----- table Color palate ---- */
+$th-color:              #F2F2F8 !default;
+$th-font-color:         $primary-text-color !default;
+$th-border-color:       #E5E5E5 !default;
+$th-border-color:       #E5E5E5 !default;
+
+
+// Define Font family and size
+$font-monsterat: 'Montserrat', sans-serif;
+$font-roboto: 'Roboto', sans-serif;
+
+$font-size-base:        0.875rem !default; // 14px
+$font-size-sm:          0.938rem !default; // 15px
+$font-size-md:          1.125rem !default; // 18px
+$font-size-lg:          1.5rem !default;   // 24px
+
+$th-font-size: 0.875rem;
+
+// Define common padding margin border radius sizes and more.
+$padding-x-10:          0.625rem !default; // 10px
+$padding-x-15:          0.938rem !default; // 15px
+$padding-x-22:          1.375rem !default; // 22px
+$padding-xy-20:         1.25rem !default;  // 20px
+
+$margin-x-10:           $padding-x-10 !default;
+$margin-x-15:           $padding-x-15 !default;
+$margin-x-20:           $padding-xy-20 !default;
+
+$margin-y-10:           $padding-x-10 !default;
+$margin-y-15:           $padding-x-15 !default;
+$margin-y-20:           $padding-xy-20 !default;
+
+$border-radius-sm:  0.19rem !default;
+$border-radius-md:  0.625rem !default;
+$border-radius-lg:  1.875rem !default;
+
+$box-shadow:        0 0.313rem 1.25rem #00000033;
+$box-shadow-d2:     0 0.313rem 1.25rem #0000001A;
+$box-shadow-d3:     0 0 1.25rem #0000001A;
+
+// Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
+$btn-font-size:         0.9375rem !default; // 15px
+$btn-padding-x:         1.25rem !default;   // 20px
+$btn-padding-x-lg:      2.125rem !default;  // 34px
+
+$button-height:         2.5rem !default;    // 40px
+$button-height-lg:      3.125rem !default;  // 50px
+
+$btn-line-height:       $button-height;
+$btn-line-height-lg:    $button-height-lg;
+
+// Customizes the `.table` component with basic values, each used across all table variations.
+
+
+// Defile Forms element like Radio, Select, Toggle and more
+
+
+// Define Modal variables
+$modal-lg:                43.75rem !default;  // 700px
+$modal-md:                37.5rem !default;   // 600px
+$modal-sm:                31.25rem !default;  // 500px
+
+// Define Transition
+$transition-type-1:     all 0.2s linear !default;
+
+// Gradient color
+$nav-bg: transparent linear-gradient(270deg, $primary-text-color 0%, $secondary-color 100%) 0% 0% no-repeat padding-box;

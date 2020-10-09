@@ -1,0 +1,327 @@
+
+ [
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf001",
+    "name": "Next-level Amplify",
+    "parentId": "c25e7207-191d-4853-947d-5153636cf669",
+    "isActive": true,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf002",
+    "name": "Google",
+    "parentId": "null",
+    "isActive": true,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf003",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf004",
+    "name": "Microsoft",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf005",
+    "name": "Facebook",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf006",
+    "name": "CoCoCola",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf007",
+    "name": "Samsung",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf008",
+    "name": "Toyota",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf009",
+    "name": "Cisco",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf010",
+    "name": "Oracle",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf011",
+    "name": "Verzion",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf012",
+    "name": "Motorola",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf013",
+    "name": "Liva",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf014",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf015",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf016",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf017",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf018",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf019",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf020",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf021",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf022",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf023",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf024",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf025",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf026",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf027",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf028",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf029",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf030",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf031",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf032",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf033",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf034",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf035",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  },
+  {
+    "tenantId": "c25e7207-191d-4853-947d-5153636cf036",
+    "name": "Apple",
+    "parentId": "null",
+    "isActive": false,
+    "isDefaultTenant": false,
+    "accountingCustomerId": "CUST10001",
+    "created": "12 Dec 20"
+  }
+]

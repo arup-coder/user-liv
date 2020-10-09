@@ -1,0 +1,114 @@
+/* ------ Main Table Start ------*/
+table.mat-table{width: 100%;
+    tr.mat-header-row, tr.mat-footer-row, tr.mat-row{height: auto;}
+    td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type{width: 3.5%; padding-left: 1.25rem;}
+    tr.mat-row:hover{background-color: #F9F9FB;}
+    td.mat-cell{ padding: 0.563rem 0.625rem; line-height: 1.5rem; color: $secondary-text-color;
+        .hamburger-btn{color: $secondary-text-color;}
+        .mat-button{line-height: normal; padding: 0.188rem 0; min-width: 1.875rem; border-radius: 50%;}
+    }
+    th.mat-header-cell{font-weight: 600; white-space: nowrap; padding: 0.625rem; line-height: 1.5rem; font-size: .875rem; background-color: $th-color; color: $th-font-color; border-width: 0.06rem 0 0.06rem 0; border-style: solid; border-color: $th-border-color;}
+}
+
+/* ------ Table Ui ------*/
+.table-wrapper{ max-height: calc(100vh - 25.17rem);}
+
+.table-main-wrapper{ border-radius: 0.3rem; background: #fff; box-shadow: 0 0 0.625rem #0000001A; overflow: hidden;
+    /* ---- Filter ----- */
+    .table-main-filter{ @include flexbox; @include align-items($value: center); padding: .625rem 1.25rem .625rem 1.25rem; position: relative;
+        &__items{display: flex; flex: 1; padding-right: $padding-x-15; margin-left: -0.625rem;
+            li{ padding: 0.88rem 0.5rem;
+                a{font-size: 1.5rem; display: block; line-height: 1rem; color: $secondary-text-color;}
+            }
+        }
+        &__search{ position: relative;
+            span{display: inline-block; position: absolute; left: 0; bottom: 0.52rem; line-height: 0.688rem;}
+        }
+        &__field{padding: 0.531rem 0.531rem 0.531rem 2rem; border: 0; min-width: 13.125rem; border-bottom: 0.06rem solid #999999; line-height: 1.375rem; font-size: 0.9rem;}
+        &__field:focus{border-color: $primary-color;}
+        &__field::placeholder{color: rgba(65, 64, 66, 0.5);}
+
+        &__filters{position: absolute; left: 0.625rem; top: $padding-x-15; background: #fff; opacity: 0; visibility: hidden; pointer-events: none; transition: all .2s linear;
+            ul{ @include flexbox; @include align-items($value: center);
+                li{padding-right: 0.625rem;
+                    a{display: block; color: $primary-color; font-size: 0.875rem; line-height: 0.625rem;
+                        &:hover{color: $secondary-text-color;} 
+                        &.active{width: 2.5rem; height: 2.5rem; background: #EAEAF2; border-radius: 50%; @include flexbox; @include align-items($value: center); @include justify-content($value: center);}
+                    }
+                    .mat-stroked-button{color: #999999; font-weight: 400; min-width: 0; border-color: #CCCCCC; background-color: #fff;
+                        .mat-button-wrapper{font-weight: 400; font-size: .875rem;}
+                        &.active{background: #9e042f17; color:rgb(87, 87, 87)9;}
+                        &[aria-expanded="true"]{border-color: $primary-color; color: $primary-color;}
+                    }
+                }
+                li.filter-link{padding: 0 0.625rem;}
+            }
+            &.active{opacity: 1; visibility: visible; pointer-events: inherit;}
+            .check-all-filter{min-height: 2.688rem;
+                li{padding: 0 0.68rem;
+                    a{color: $secondary-text-color;
+                        &:hover{color: $primary-color;}
+                    }
+                }
+                li:first-child{font-size: 0.813rem; font-weight: 700; color: #999999; min-width: 8rem;}
+            }
+        }
+        &__datepick{ display: flex; border: 1px solid #CCCCCC; padding: 0 0 0 1.1rem; border-radius: 0.3rem;
+            .mat-icon-button{height: 2.375rem; line-height: 2.375rem;}
+            .mat-input-element{max-width: 7.625rem; margin-top: 2px; font-size: 0.875rem;}
+        }
+    }
+
+    /* ------ Table Pagination ------*/
+    .table-with-pagination{
+        .mat-paginator-container{
+            button.mat-button-base + button.mat-button-base{margin-left: 0;}
+            .mat-form-field-appearance-legacy .mat-form-field-underline{background: none;}
+            .mat-icon-button{color: $secondary-text-color;
+                &:hover{color: $link-color;}
+            }
+            .mat-icon-button[disabled][disabled]{color: rgba(65, 64, 66, .5)}
+            .mat-form-field{margin-top: 0;
+                .mat-form-field-wrapper{padding-top: 0; padding-bottom: 0; margin: 0;
+                    .mat-form-field-infix{padding: 0; border: 0;
+                        .mat-select-value-text{font-size: 0.875rem; font-weight: 500;}
+                    }
+                }
+            } 
+            .mat-paginator-page-size-select{width: 2.5rem;}
+            .mat-paginator-page-size-label{font-size: 0.875rem; color: #999999;}
+            .mat-select-arrow-wrapper{transform: translateY(-0.1rem);
+                .mat-select-arrow{border: solid rgba(65,64,66,.5); border-width: 0px 0.13rem 0.13rem 0; display: inline-block; padding: 0.265rem; transform: rotate(45deg); -webkit-transform: rotate(45deg);}
+            }
+            .mat-form-field-appearance-legacy .mat-form-field-ripple{height: 0;}
+        }
+    }
+
+    // .mat-drawer-backdrop.mat-drawer-shown{display: none;}
+}
+.expand .table-wrapper{
+    overflow: auto; max-width: calc(100vw - 22.16rem);
+}
+.collapsed .table-wrapper{
+    overflow: auto; max-width: calc(100vw - 7.79rem);
+}
+
+@media only screen and (max-width: 767px){
+
+    .table-main-filter{padding: .625rem 1rem; @include flex-direction($value: column); @include align-items($value:flex-start);
+        &__items{width: 100%; padding-right: 0;}
+        &__search{width: 100%;}
+        &__field{width: calc(100% - 2.531rem);}
+    }
+    .table-wrapper{overflow-x: scroll; width: 100%; max-width: calc(100vw - 2.50rem);}
+    table.mat-table{
+        th.mat-header-cell{white-space: nowrap;}
+    }
+    .mat-paginator-range-actions{width: 100%;
+        .mat-paginator-range-label{margin-right: auto;}
+    }
+    .mat-paginator-container .mat-paginator-page-size{width: 100%; justify-content: center; padding: 0.625rem 0; margin: 0;}
+    
+}
+
+/* ------ Main Table End ------*/

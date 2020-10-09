@@ -1,0 +1,29 @@
+@import 'theme';
+
+@mixin nav-frame() {
+    background: $nav-bg;
+    position: relative;
+}
+
+@mixin top-second-bar() {
+    background: $nav-bg;
+    padding: 1.25rem 1.25rem 3.125rem; 
+    min-height: 6.875rem;
+    @include flexbox;
+    @include align-items($value: center);
+    @include justify-content(space-between);
+    
+    h2 {
+        font-size: 1.5rem; 
+        margin: 0; color: #fff;
+        font-family: $font-monsterat; 
+        @include flexbox;
+        @include align-items($value: center);
+    }
+    .circle-btn { width: 3.125rem; height: 3.125rem; line-height: 3.125rem;}
+    a.circle-btn.disabled {cursor: default !important; pointer-events: none !important; background-color: rgba(0, 0, 0, 0.12) !important; color: rgba(0, 0, 0, 0.16) !important; }
+    .arrow-left { margin: 0; font-size: 1.5rem; color: #fff; height: 1rem; display: block; overflow: hidden; width: 1.875rem;
+        span{font-size: 2.125rem; line-height: 1.063rem; margin-left: -0.25rem;}
+    } 
+    p { color: #fff; }
+}

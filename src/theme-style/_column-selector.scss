@@ -1,0 +1,30 @@
+.dialog-column-selector{
+    .mat-dialog-container{padding: 0; min-width: $modal-sm; max-width: $modal-lg; margin: 0 auto;
+        .mat-dialog-content{padding: 0; margin: 0;
+          h2{padding: 0.938rem 1.25rem; margin: 0; font-family: $font-monsterat; font-size: $font-size-sm; color: $primary-text-color;}
+          .list-selector{padding: 0.938rem 1.25rem;
+            li{padding-bottom: 0.938rem; font-size: 0.875rem; color: #333;}
+          }
+          .list-drager{ padding: 0.938rem 1rem;
+            li{@include flexbox; @include align-items($value: center); font-size: 0.875rem; color: #333;
+              .drag-list{@include flexbox; @include align-items($value: center); flex: 1; cursor: move; padding: 0.375rem 0.25rem;
+                span{padding-left: 0.875rem;}
+              }
+              .mat-button-base{margin: 0; padding: 0; min-width: 0; height: auto; line-height: normal;}
+            }
+          }
+        }
+        .mat-dialog-actions{margin-bottom: 0; padding: 0.938rem 1.25rem; @include justify-content($value: flex-end); min-height: 0;
+          .mat-button-base + .mat-button-base{margin-left: 0.938rem;}
+        }
+    }
+}
+.cdk-drag-preview.drag-list {
+  &.cdk-drag{box-shadow: 0 0 10px rgba(0,0,0,0.15); padding-left: 0.40rem; @include flexbox; @include align-items($value: center); font-size: 0.875rem; background: #fff; opacity: 1;
+    span{padding-left: 0.875rem;}
+  }
+}
+
+@media only screen and (max-width: 767px){
+  .mat-dialog-container{min-width: 0;}
+}

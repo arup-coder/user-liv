@@ -1,0 +1,43 @@
+// Button sizes
+@mixin button-size($btn-padding-x, $btn-line-height, $button-height) {
+  padding: 0 $btn-padding-x;
+  line-height: $btn-line-height;
+  .mat-button-wrapper{font-size: $btn-font-size; font-weight: 700;}
+
+  .mat-button-base{
+    box-shadow: $box-shadow;
+
+    &[disabled] {
+      background: rgba(0,0,0,.12);
+      &:hover{background-color: rgba(0,0,0,.12);}
+    }
+  }
+}
+
+button.mat-button-base + button.mat-button-base{margin-left: $btn-padding-x;}
+.mat-button-base.mat-default, .mat-button-base.mat-flat-button{ box-shadow: $box-shadow-d2;
+  &:hover{box-shadow: $box-shadow;}
+}
+.mat-button-base.mat-default{ background-color: #fff; color: $primary-text-color;}
+.mat-fab.mat-transparent, .mat-flat-button.mat-transparent, .mat-mini-fab.mat-transparent, .mat-button-base.mat-button.mat-transparent, .mat-raised-button.mat-transparent{background: none; color: $primary-color; box-shadow: $box-shadow-d2;}
+
+.mat-button-base.mat-primary{background-color: $button-primary; color: #fff;}
+.mat-button-base.mat-accent{background-color: $button-accent; color: #fff;}
+
+.mat-button-base.btn-lg{
+  @include button-size($btn-padding-x-lg, $button-height-lg, $button-height-lg);
+}
+.mat-button-base.btn-sm{
+  @include button-size($btn-padding-x, $button-height, $btn-line-height);
+}
+
+.mat-button-base.rounded{border-radius: 2.25rem; padding: 0 1.875rem; font-family: $font-monsterat; }	
+.circle-btn{border-radius: 50%; background: $primary-color; color: #fff; display: flex; align-items: center; justify-content: center;	
+  span{font-size: 1.875rem;}	
+  &:hover{color: $primary-text-color;}	
+}
+
+@media only screen and (max-width: 767px){
+  .btn.btn-lg{@include button-size($btn-padding-x, $button-height, $btn-line-height);}
+}
+
